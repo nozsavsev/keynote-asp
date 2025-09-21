@@ -1,0 +1,2258 @@
+openapi: 3.0.4
+info:
+  title: nauth-asp
+  version: "1.0"
+paths:
+  /api/EmailActions/decodeApplyToken:
+    post:
+      tags:
+        - EmailActions
+      parameters:
+        - name: token
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/DecodedEmailActionDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DecodedEmailActionDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/DecodedEmailActionDTOResponseWrapper"
+  /api/EmailActions/neutralizeEmailAction:
+    post:
+      tags:
+        - EmailActions
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/NeutralizeEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeutralizeEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/NeutralizeEmailActionResponseResponseWrapper"
+  /api/EmailActions/getAllByUserId:
+    get:
+      tags:
+        - EmailActions
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/EmailActionDTOListResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailActionDTOListResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/EmailActionDTOListResponseWrapper"
+  /api/EmailActions/verifyEmailRequest:
+    post:
+      tags:
+        - EmailActions
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+  /api/EmailActions/applyEmailRequest:
+    post:
+      tags:
+        - EmailActions
+      parameters:
+        - name: token
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+  /api/EmailActions/passwordResetRequest:
+    post:
+      tags:
+        - EmailActions
+      parameters:
+        - name: email
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+  /api/EmailActions/passwordResetApply:
+    post:
+      tags:
+        - EmailActions
+      parameters:
+        - name: token
+          in: query
+          schema:
+            type: string
+        - name: password
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+  /api/EmailActions/emailCodeRequest:
+    post:
+      tags:
+        - EmailActions
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+  /api/EmailActions/emailSignInRequest:
+    post:
+      tags:
+        - EmailActions
+      parameters:
+        - name: email
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+  /api/EmailActions/deleteAccountRequest:
+    post:
+      tags:
+        - EmailActions
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+  /api/EmailActions/deleteAccountApply:
+    post:
+      tags:
+        - EmailActions
+      parameters:
+        - name: token
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+  /api/EmailActions/changeEmailRequest:
+    post:
+      tags:
+        - EmailActions
+      parameters:
+        - name: newEmail
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+  /api/EmailActions/changeEmailApply:
+    post:
+      tags:
+        - EmailActions
+      parameters:
+        - name: token
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+  /api/EmailTemplates:
+    post:
+      tags:
+        - EmailTemplates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEmailTemplateDTO"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateEmailTemplateDTO"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateEmailTemplateDTO"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+    put:
+      tags:
+        - EmailTemplates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmailTemplateDTO"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/EmailTemplateDTO"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/EmailTemplateDTO"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+    delete:
+      tags:
+        - EmailTemplates
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/EmailTemplates/all:
+    get:
+      tags:
+        - EmailTemplates
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/EmailTemplateDTOListResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailTemplateDTOListResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/EmailTemplateDTOListResponseWrapper"
+  "/api/EmailTemplates/{id}":
+    get:
+      tags:
+        - EmailTemplates
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+  /api/Nauth/currentService:
+    get:
+      tags:
+        - Nauth
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+  /api/Nauth/decodeUserToken:
+    post:
+      tags:
+        - Nauth
+      parameters:
+        - name: token
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/FullSessionDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FullSessionDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/FullSessionDTOResponseWrapper"
+  /api/Nauth/createServicePermission:
+    post:
+      tags:
+        - Nauth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePermissionDTO"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreatePermissionDTO"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreatePermissionDTO"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PermissionDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PermissionDTOResponseWrapper"
+  /api/Nauth/deleteServicePermission:
+    post:
+      tags:
+        - Nauth
+      parameters:
+        - name: permissionId
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/Nauth/UpdateUserPermissions:
+    post:
+      tags:
+        - Nauth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceUpdateUserPermissionsDTO"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ServiceUpdateUserPermissionsDTO"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ServiceUpdateUserPermissionsDTO"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/Service/create:
+    post:
+      tags:
+        - Service
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateServiceDTO"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateServiceDTO"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateServiceDTO"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+  /api/Service/update:
+    post:
+      tags:
+        - Service
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+        - name: name
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+  /api/Service/getSession:
+    post:
+      tags:
+        - Service
+      parameters:
+        - name: serviceId
+          in: query
+          schema:
+            type: string
+        - name: expiresAt
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/Service/delete:
+    post:
+      tags:
+        - Service
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/Service/getAllGlobal:
+    get:
+      tags:
+        - Service
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOListResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOListResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOListResponseWrapper"
+  /api/Service/getbyId:
+    get:
+      tags:
+        - Service
+      parameters:
+        - name: serviceId
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+  /api/Service/getAllOwned:
+    get:
+      tags:
+        - Service
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOListResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOListResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ServiceDTOListResponseWrapper"
+  /api/Session/revokeCurrent:
+    delete:
+      tags:
+        - Session
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/Session/revoke:
+    delete:
+      tags:
+        - Session
+      parameters:
+        - name: sessionId
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/Session/revoke/my:
+    delete:
+      tags:
+        - Session
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/Session/revoke/allMy:
+    delete:
+      tags:
+        - Session
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/Session/getMy:
+    get:
+      tags:
+        - Session
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SessionDTOListResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionDTOListResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SessionDTOListResponseWrapper"
+  /Status:
+    get:
+      tags:
+        - Status
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/User/currentUser:
+    get:
+      tags:
+        - User
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/User/uploadAvatar:
+    post:
+      tags:
+        - User
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+            encoding:
+              file:
+                style: form
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/User/register:
+    post:
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDTO"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDTO"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDTO"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/User/login:
+    post:
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDTO"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDTO"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDTO"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/User/ContinueWithGoogle:
+    get:
+      tags:
+        - User
+      parameters:
+        - name: GoogleAccessToken
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/User/loginWithCode:
+    post:
+      tags:
+        - User
+      parameters:
+        - name: email
+          in: query
+          schema:
+            type: string
+        - name: code
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/User/setup2FA:
+    post:
+      tags:
+        - User
+      parameters:
+        - name: code
+          in: query
+          schema:
+            type: string
+        - name: name
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+  /api/User/activate2FA:
+    post:
+      tags:
+        - User
+      parameters:
+        - name: code
+          in: query
+          schema:
+            type: string
+        - name: _2faId
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/StringResponseWrapper"
+  /api/User/delete2FAWithRecoveryCode:
+    post:
+      tags:
+        - User
+      parameters:
+        - name: code
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+  /api/User/activateSession:
+    post:
+      tags:
+        - User
+      parameters:
+        - name: code
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+  /api/User/delete2FAWithCode:
+    post:
+      tags:
+        - User
+      parameters:
+        - name: code
+          in: query
+          schema:
+            type: string
+        - name: _2faId
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+  /api/User/updateUserName:
+    post:
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateNameDTO"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateNameDTO"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateNameDTO"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/UserManagement/fetchPermissions:
+    get:
+      tags:
+        - UserManagement
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PermissionDTOListResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionDTOListResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PermissionDTOListResponseWrapper"
+  /api/UserManagement/fetchUsers:
+    get:
+      tags:
+        - UserManagement
+      parameters:
+        - name: match
+          in: query
+          schema:
+            type: string
+        - name: skip
+          in: query
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: take
+          in: query
+          schema:
+            type: integer
+            format: int32
+            default: 20
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOListResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOListResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOListResponseWrapper"
+  /api/UserManagement/updatePermissions:
+    post:
+      tags:
+        - UserManagement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/UserManagement/deleteUser:
+    post:
+      tags:
+        - UserManagement
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/UserManagement/forceVerifyEmail:
+    post:
+      tags:
+        - UserManagement
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/UserManagement/forceUnVerifyEmail:
+    post:
+      tags:
+        - UserManagement
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/UserManagement/disableUser:
+    post:
+      tags:
+        - UserManagement
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/UserManagement/enableUser:
+    post:
+      tags:
+        - UserManagement
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/UserManagement/setUserEmail:
+    post:
+      tags:
+        - UserManagement
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+        - name: email
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/UserManagement/setUserPassword:
+    post:
+      tags:
+        - UserManagement
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+        - name: password
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/UserManagement/revokeAllUserSessions:
+    post:
+      tags:
+        - UserManagement
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/UserManagement/updateUserName:
+    post:
+      tags:
+        - UserManagement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminUpdateUserNameDTO"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AdminUpdateUserNameDTO"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AdminUpdateUserNameDTO"
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserDTOResponseWrapper"
+  /api/UserManagement/neutralizeEmailAction:
+    post:
+      tags:
+        - UserManagement
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/NeutralizeEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeutralizeEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/NeutralizeEmailActionResponseResponseWrapper"
+  /api/UserManagement/verifyEmailRequest:
+    post:
+      tags:
+        - UserManagement
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+  /api/UserManagement/passwordResetRequest:
+    post:
+      tags:
+        - UserManagement
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+  /api/UserManagement/deleteAccountRequest:
+    post:
+      tags:
+        - UserManagement
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+  /api/UserManagement/changeEmailRequest:
+    post:
+      tags:
+        - UserManagement
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: string
+        - name: newEmail
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+components:
+  schemas:
+    AdminUpdateUserNameDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApplyEmailActionResponse:
+      type: object
+      properties:
+        appliedSuccessfully:
+          type: boolean
+      additionalProperties: false
+    ApplyEmailActionResponseResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          $ref: "#/components/schemas/ApplyEmailActionResponse"
+      additionalProperties: false
+    AuthFailureReasons:
+      enum:
+        - SessionExpired
+        - _2FARequired
+        - RequireVerifiedEmail
+        - RequireEnabledUser
+        - Require2FASetup
+        - ForeginResource
+        - PrManageUsers
+        - PrManageOwnServices
+        - PrManageServices
+        - PrManageEmailTemplates
+      type: string
+    CreateEmailTemplateDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        isActive:
+          type: boolean
+        type:
+          $ref: "#/components/schemas/EmailTemplateType"
+        subject:
+          type: string
+          nullable: true
+        body:
+          type: string
+          nullable: true
+        htmlBody:
+          type: string
+          nullable: true
+      additionalProperties: false
+    CreatePermissionDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        key:
+          type: string
+          nullable: true
+        serviceId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    CreateServiceDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    CreateUserDTO:
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          minLength: 1
+          type: string
+        password:
+          minLength: 1
+          type: string
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    DecodedEmailActionDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        user:
+          $ref: "#/components/schemas/UserBasicDTO"
+        data:
+          type: string
+          nullable: true
+        type:
+          $ref: "#/components/schemas/EmailActionType"
+        expiresAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    DecodedEmailActionDTOResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          $ref: "#/components/schemas/DecodedEmailActionDTO"
+      additionalProperties: false
+    EmailActionDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        userId:
+          type: string
+          nullable: true
+        data:
+          type: string
+          nullable: true
+        type:
+          $ref: "#/components/schemas/EmailActionType"
+        expiresAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    EmailActionDTOListResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          type: array
+          items:
+            $ref: "#/components/schemas/EmailActionDTO"
+          nullable: true
+      additionalProperties: false
+    EmailActionType:
+      enum:
+        - VerifyEmail
+        - PasswordReset
+        - EmailCode
+        - EmailSignIn
+        - DeleteAccount
+        - ChangeEmail
+      type: string
+    EmailTemplateDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        isActive:
+          type: boolean
+        type:
+          $ref: "#/components/schemas/EmailTemplateType"
+        subject:
+          type: string
+          nullable: true
+        body:
+          type: string
+          nullable: true
+        htmlBody:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    EmailTemplateDTOListResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          type: array
+          items:
+            $ref: "#/components/schemas/EmailTemplateDTO"
+          nullable: true
+      additionalProperties: false
+    EmailTemplateDTOResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          $ref: "#/components/schemas/EmailTemplateDTO"
+      additionalProperties: false
+    EmailTemplateType:
+      enum:
+        - VerifyEmail
+        - PasswordReset
+        - EmailCode
+        - EmailSignIn
+        - DeleteAccount
+        - ChangeEmail
+      type: string
+    FullSessionDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        userId:
+          type: string
+          nullable: true
+        serviceId:
+          type: string
+          nullable: true
+        is2FAConfirmed:
+          type: boolean
+        expiresAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        ipAddress:
+          type: string
+          nullable: true
+        device:
+          type: string
+          nullable: true
+        browser:
+          type: string
+          nullable: true
+        os:
+          type: string
+          nullable: true
+        service:
+          $ref: "#/components/schemas/ServiceDTO"
+        user:
+          $ref: "#/components/schemas/UserDTO"
+      additionalProperties: false
+    FullSessionDTOResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          $ref: "#/components/schemas/FullSessionDTO"
+      additionalProperties: false
+    NeutralizeEmailActionResponse:
+      type: object
+      properties:
+        neutralizedSuccessfully:
+          type: boolean
+      additionalProperties: false
+    NeutralizeEmailActionResponseResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          $ref: "#/components/schemas/NeutralizeEmailActionResponse"
+      additionalProperties: false
+    PermissionBasicDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        key:
+          type: string
+          nullable: true
+        serviceId:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    PermissionDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        key:
+          type: string
+          nullable: true
+        serviceId:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        service:
+          $ref: "#/components/schemas/ServiceBasicDTO"
+      additionalProperties: false
+    PermissionDTOListResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          type: array
+          items:
+            $ref: "#/components/schemas/PermissionDTO"
+          nullable: true
+      additionalProperties: false
+    PermissionDTOResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          $ref: "#/components/schemas/PermissionDTO"
+      additionalProperties: false
+    RequestAction:
+      enum:
+        - Add
+        - Remove
+      type: string
+    RequestEmailActionResponse:
+      type: object
+      properties:
+        sentSuccessfully:
+          type: boolean
+        secondsToWait:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    RequestEmailActionResponseResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          $ref: "#/components/schemas/RequestEmailActionResponse"
+      additionalProperties: false
+    ServiceBasicDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        userId:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ServiceDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        userId:
+          type: string
+          nullable: true
+        user:
+          $ref: "#/components/schemas/UserBasicDTO"
+        createdAt:
+          type: string
+          format: date-time
+        sessions:
+          type: array
+          items:
+            $ref: "#/components/schemas/SessionBasicDTO"
+          nullable: true
+        permissions:
+          type: array
+          items:
+            $ref: "#/components/schemas/PermissionBasicDTO"
+          nullable: true
+      additionalProperties: false
+    ServiceDTOListResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          type: array
+          items:
+            $ref: "#/components/schemas/ServiceDTO"
+          nullable: true
+      additionalProperties: false
+    ServiceDTOResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          $ref: "#/components/schemas/ServiceDTO"
+      additionalProperties: false
+    ServicePermissionOnUserUpdateDTOInner:
+      type: object
+      properties:
+        permissionId:
+          type: string
+          nullable: true
+        action:
+          $ref: "#/components/schemas/RequestAction"
+      additionalProperties: false
+    ServiceUpdateUserPermissionsDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          nullable: true
+        permissions:
+          type: array
+          items:
+            $ref: "#/components/schemas/ServicePermissionOnUserUpdateDTOInner"
+          nullable: true
+      additionalProperties: false
+    SessionBasicDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        userId:
+          type: string
+          nullable: true
+        serviceId:
+          type: string
+          nullable: true
+        is2FAConfirmed:
+          type: boolean
+        expiresAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        ipAddress:
+          type: string
+          nullable: true
+        device:
+          type: string
+          nullable: true
+        browser:
+          type: string
+          nullable: true
+        os:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SessionDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        userId:
+          type: string
+          nullable: true
+        serviceId:
+          type: string
+          nullable: true
+        is2FAConfirmed:
+          type: boolean
+        expiresAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        ipAddress:
+          type: string
+          nullable: true
+        device:
+          type: string
+          nullable: true
+        browser:
+          type: string
+          nullable: true
+        os:
+          type: string
+          nullable: true
+        service:
+          $ref: "#/components/schemas/ServiceBasicDTO"
+      additionalProperties: false
+    SessionDTOListResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          type: array
+          items:
+            $ref: "#/components/schemas/SessionDTO"
+          nullable: true
+      additionalProperties: false
+    StringResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UpdateNameDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UserBasicDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        avatarURL:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UserDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        avatarURL:
+          type: string
+          nullable: true
+        isEmailVerified:
+          type: boolean
+        isEnabled:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        emailActions:
+          type: array
+          items:
+            $ref: "#/components/schemas/EmailActionDTO"
+          nullable: true
+        sessions:
+          type: array
+          items:
+            $ref: "#/components/schemas/SessionDTO"
+          nullable: true
+        permissions:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserPermissionDTO"
+          nullable: true
+        services:
+          type: array
+          items:
+            $ref: "#/components/schemas/ServiceDTO"
+          nullable: true
+        twoFactorAuthEntries:
+          type: array
+          items:
+            $ref: "#/components/schemas/_2FAEntryDTO"
+          nullable: true
+      additionalProperties: false
+    UserDTOListResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserDTO"
+          nullable: true
+      additionalProperties: false
+    UserDTOResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          $ref: "#/components/schemas/UserDTO"
+      additionalProperties: false
+    UserPermissionDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        permissionId:
+          type: string
+          nullable: true
+        userId:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        permission:
+          $ref: "#/components/schemas/PermissionBasicDTO"
+      additionalProperties: false
+    WrResponseStatus:
+      enum:
+        - InternalError
+        - Ok
+        - Forbidden
+        - Unauthorized
+        - NotFound
+        - BadRequest
+        - Cooldown
+        - ServerDown
+        - EmailNotAvailable
+        - InvalidEmail
+        - InvalidPassword
+        - RequireEnabledUser
+        - InvalidApplyToken
+      type: string
+    _2FAEntryDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        isActive:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    _2FAEntrySetupDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        _2FASecret:
+          type: string
+          nullable: true
+        recoveryCode:
+          type: string
+          nullable: true
+        qrCodeUrl:
+          type: string
+          nullable: true
+      additionalProperties: false
+    _2FAEntrySetupDTOResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/WrResponseStatus"
+        authenticationFailureReasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthFailureReasons"
+          nullable: true
+        response:
+          $ref: "#/components/schemas/_2FAEntrySetupDTO"
+      additionalProperties: false
