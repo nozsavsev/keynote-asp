@@ -28,7 +28,7 @@ namespace keynote_asp
         ForeginResource,
 
 
-        //permissions
+        //NAUTH permissions
         [JsonPropertyName("PrManageUsers")]
         PrManageUsers,
 
@@ -40,6 +40,14 @@ namespace keynote_asp
 
         [JsonPropertyName("PrManageEmailTemplates")]
         PrManageEmailTemplates,
+
+
+        //Keynote permissions
+        [JsonPropertyName("PrUploadFiles")]
+        PrUploadFiles,
+
+        [JsonPropertyName("PrAdminManageKeynotes")]
+        PrAdminManageKeynotes,
 
     }
 

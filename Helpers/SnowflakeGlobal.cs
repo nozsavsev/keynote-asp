@@ -43,5 +43,15 @@ namespace keynote_asp.Helpers
             return result;
         }
 
+        public static DateTime GetTimestamp(long snowflakeId)
+        {
+            // Snowflake timestamp extraction (first 42 bits shifted right by 22)
+            // Epoch is typically January 1, 2015 00:00:00 UTC for Twitter snowflakes
+            // But IdGen might use different epoch, let's use Unix epoch as fallback
+            const long epoch = 1420070400000L; // January 1, 2015 00:00:00 UTC in milliseconds
+            var timestamp = (snowflakeId >> 22) + epoch;
+            return DateTimeOffset.FromUnixTimeMilliseconds(timestamp).DateTime;
+        }
+
     }
 }

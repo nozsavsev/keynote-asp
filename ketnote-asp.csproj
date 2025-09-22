@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>keynote_asp</RootNamespace>
@@ -44,7 +44,6 @@
 
   <ItemGroup>
     <Folder Include="Scripts\" />
-    <Folder Include="SignalRHubs\" />
   </ItemGroup>
 
 </Project>

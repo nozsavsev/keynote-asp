@@ -23,7 +23,7 @@ namespace keynote_asp.AuthHandlers
             }
             else
             {
-                httpContext.AddAuthenticationFailureReason(AuthFailureReasons.ForeginResource);
+                httpContext.AddAuthenticationFailureReason(Enum.Parse<AuthFailureReasons>(requirement.Permission));
                 context.Fail();
             }
 

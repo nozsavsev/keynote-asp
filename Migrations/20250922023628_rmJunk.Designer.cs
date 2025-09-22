@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using keynote_asp.DbContexts;
@@ -11,9 +12,11 @@ using keynote_asp.DbContexts;
 namespace keynote_asp.Migrations
 {
     [DbContext(typeof(KeynoteDbContext))]
-    partial class KeynoteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250922023628_rmJunk")]
+    partial class rmJunk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,12 +51,6 @@ namespace keynote_asp.Migrations
 
                     b.Property<string>("PresentorNotesUrl")
                         .HasColumnType("text");
-
-                    b.Property<int>("TotalFrames")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TransitionType")
-                        .HasColumnType("integer");
 
                     b.Property<int>("Type")
                         .HasColumnType("integer");

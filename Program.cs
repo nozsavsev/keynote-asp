@@ -226,7 +226,7 @@ namespace keynote_asp
             app.UseAuthorization();
 
             app.MapControllers();
-            app.MapHub<SignalRHubs.AuthHub>("/authhub");
+            app.MapHub<SignalRHubs.KeynoteHub>("/authhub");
 
             // Initialize permissions on startup
             using (var scope = app.Services.CreateScope())

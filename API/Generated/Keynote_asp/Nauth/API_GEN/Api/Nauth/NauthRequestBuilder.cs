@@ -4,6 +4,9 @@ using Keynote_asp.Nauth.API_GEN.Api.Nauth.CreateServicePermission;
 using Keynote_asp.Nauth.API_GEN.Api.Nauth.CurrentService;
 using Keynote_asp.Nauth.API_GEN.Api.Nauth.DecodeUserToken;
 using Keynote_asp.Nauth.API_GEN.Api.Nauth.DeleteServicePermission;
+using Keynote_asp.Nauth.API_GEN.Api.Nauth.FetchUsers;
+using Keynote_asp.Nauth.API_GEN.Api.Nauth.GetUserById;
+using Keynote_asp.Nauth.API_GEN.Api.Nauth.GetUserBySessionId;
 using Keynote_asp.Nauth.API_GEN.Api.Nauth.UpdateUserPermissions;
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
@@ -38,6 +41,21 @@ namespace Keynote_asp.Nauth.API_GEN.Api.Nauth
         public global::Keynote_asp.Nauth.API_GEN.Api.Nauth.DeleteServicePermission.DeleteServicePermissionRequestBuilder DeleteServicePermission
         {
             get => new global::Keynote_asp.Nauth.API_GEN.Api.Nauth.DeleteServicePermission.DeleteServicePermissionRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The fetchUsers property</summary>
+        public global::Keynote_asp.Nauth.API_GEN.Api.Nauth.FetchUsers.FetchUsersRequestBuilder FetchUsers
+        {
+            get => new global::Keynote_asp.Nauth.API_GEN.Api.Nauth.FetchUsers.FetchUsersRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The getUserById property</summary>
+        public global::Keynote_asp.Nauth.API_GEN.Api.Nauth.GetUserById.GetUserByIdRequestBuilder GetUserById
+        {
+            get => new global::Keynote_asp.Nauth.API_GEN.Api.Nauth.GetUserById.GetUserByIdRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The getUserBySessionId property</summary>
+        public global::Keynote_asp.Nauth.API_GEN.Api.Nauth.GetUserBySessionId.GetUserBySessionIdRequestBuilder GetUserBySessionId
+        {
+            get => new global::Keynote_asp.Nauth.API_GEN.Api.Nauth.GetUserBySessionId.GetUserBySessionIdRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The updateUserPermissions property</summary>
         public global::Keynote_asp.Nauth.API_GEN.Api.Nauth.UpdateUserPermissions.UpdateUserPermissionsRequestBuilder UpdateUserPermissions

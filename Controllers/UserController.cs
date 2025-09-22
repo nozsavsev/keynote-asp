@@ -27,7 +27,7 @@ namespace keynote_asp.Controllers
         [HttpGet]
         [Route("currentUser")]
         [Authorize]
-        public async Task<ActionResult<ResponseWrapper<MeDTO>>> GetCurrentUser()
+        public async Task<ActionResult<ResponseWrapper<KeynoteUserDTO>>> GetCurrentUser()
         {
             try
             {
@@ -36,98 +36,22 @@ namespace keynote_asp.Controllers
 
                 if (KeynoteUser == null)
                 {
-                    return StatusCode(500, new ResponseWrapper<MeDTO>(WrResponseStatus.InternalError, null));
+                    return BadRequest(new ResponseWrapper<KeynoteUserDTO>(WrResponseStatus.InternalError, null));
                 }
 
                 if (NauthSession?.User == null)
                 {
-                    return StatusCode(500, new ResponseWrapper<MeDTO>(WrResponseStatus.InternalError, null));
+                    return BadRequest(new ResponseWrapper<KeynoteUserDTO>(WrResponseStatus.InternalError, null));
                 }
 
-                var dto = new MeDTO
-                {
-                    KeynoteUser = _mapper.Map<KeynoteUserDTO>(KeynoteUser),
-                    NauthUser = _mapper.Map<Keynote_asp.Nauth.API_GEN.Models.UserDTO>(NauthSession.User)
-                };
 
-                return Ok(new ResponseWrapper<MeDTO>(WrResponseStatus.Ok, dto));
+                return Ok(new ResponseWrapper<KeynoteUserDTO>(WrResponseStatus.Ok, _mapper.Map<KeynoteUserDTO>(KeynoteUser)));
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error occurred while getting current user");
-                return StatusCode(500, new ResponseWrapper<MeDTO>(WrResponseStatus.InternalError, null));
+                return StatusCode(500, new ResponseWrapper<KeynoteUserDTO>(WrResponseStatus.InternalError, null));
             }
         }
-
-        [HttpGet]
-        [Route("currentUserManage")]
-        [Authorize("PrAdminManageKeynotes")]
-        public async Task<ActionResult<ResponseWrapper<MeDTO>>> GetCurrentUserD()
-        {
-            try
-            {
-                var KeynoteUser = HttpContext.GetKeynoteUser();
-                var NauthSession = HttpContext.GetNauthSession();
-
-                if (KeynoteUser == null)
-                {
-                    return StatusCode(500, new ResponseWrapper<MeDTO>(WrResponseStatus.InternalError, null));
-                }
-
-                if (NauthSession?.User == null)
-                {
-                    return StatusCode(500, new ResponseWrapper<MeDTO>(WrResponseStatus.InternalError, null));
-                }
-
-                var dto = new MeDTO
-                {
-                    KeynoteUser = _mapper.Map<KeynoteUserDTO>(KeynoteUser),
-                    NauthUser = _mapper.Map<Keynote_asp.Nauth.API_GEN.Models.UserDTO>(NauthSession.User)
-                };
-
-                return Ok(new ResponseWrapper<MeDTO>(WrResponseStatus.Ok, dto));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error occurred while getting current user");
-                return StatusCode(500, new ResponseWrapper<MeDTO>(WrResponseStatus.InternalError, null));
-            }
-        }
-
-        [HttpGet]
-        [Route("currentUserUpload")]
-        [Authorize("PrUploadFiles")]
-        public async Task<ActionResult<ResponseWrapper<MeDTO>>> GetCurrentUserE()
-        {
-            try
-            {
-                var KeynoteUser = HttpContext.GetKeynoteUser();
-                var NauthSession = HttpContext.GetNauthSession();
-
-                if (KeynoteUser == null)
-                {
-                    return StatusCode(500, new ResponseWrapper<MeDTO>(WrResponseStatus.InternalError, null));
-                }
-
-                if (NauthSession?.User == null)
-                {
-                    return StatusCode(500, new ResponseWrapper<MeDTO>(WrResponseStatus.InternalError, null));
-                }
-
-                var dto = new MeDTO
-                {
-                    KeynoteUser = _mapper.Map<KeynoteUserDTO>(KeynoteUser),
-                    NauthUser = _mapper.Map<Keynote_asp.Nauth.API_GEN.Models.UserDTO>(NauthSession.User)
-                };
-
-                return Ok(new ResponseWrapper<MeDTO>(WrResponseStatus.Ok, dto));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error occurred while getting current user");
-                return StatusCode(500, new ResponseWrapper<MeDTO>(WrResponseStatus.InternalError, null));
-            }
-        }
-
     }
 }

@@ -428,6 +428,84 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/FullSessionDTOResponseWrapper'
+  /api/Nauth/fetchUsers:
+    post:
+      tags:
+        - Nauth
+      parameters:
+        - name: match
+          in: query
+          schema:
+            type: string
+        - name: skip
+          in: query
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: take
+          in: query
+          schema:
+            type: integer
+            format: int32
+            default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserDTOListResponseWrapper'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTOListResponseWrapper'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserDTOListResponseWrapper'
+  /api/Nauth/getUserById:
+    post:
+      tags:
+        - Nauth
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
+  /api/Nauth/getUserBySessionId:
+    post:
+      tags:
+        - Nauth
+      parameters:
+        - name: sessionId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/FullSessionDTOResponseWrapper'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FullSessionDTOResponseWrapper'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/FullSessionDTOResponseWrapper'
   /api/Nauth/createServicePermission:
     post:
       tags:
