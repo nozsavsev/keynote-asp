@@ -1,7 +1,7 @@
 openapi: 3.0.4
 info:
   title: nauth-asp
-  version: "1.0"
+  version: '1.0'
 paths:
   /api/EmailActions/decodeApplyToken:
     post:
@@ -13,18 +13,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/DecodedEmailActionDTOResponseWrapper"
+                $ref: '#/components/schemas/DecodedEmailActionDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/DecodedEmailActionDTOResponseWrapper"
+                $ref: '#/components/schemas/DecodedEmailActionDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/DecodedEmailActionDTOResponseWrapper"
+                $ref: '#/components/schemas/DecodedEmailActionDTOResponseWrapper'
   /api/EmailActions/neutralizeEmailAction:
     post:
       tags:
@@ -35,52 +35,52 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/NeutralizeEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/NeutralizeEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/NeutralizeEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/NeutralizeEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/NeutralizeEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/NeutralizeEmailActionResponseResponseWrapper'
   /api/EmailActions/getAllByUserId:
     get:
       tags:
         - EmailActions
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/EmailActionDTOListResponseWrapper"
+                $ref: '#/components/schemas/EmailActionDTOListResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/EmailActionDTOListResponseWrapper"
+                $ref: '#/components/schemas/EmailActionDTOListResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/EmailActionDTOListResponseWrapper"
+                $ref: '#/components/schemas/EmailActionDTOListResponseWrapper'
   /api/EmailActions/verifyEmailRequest:
     post:
       tags:
         - EmailActions
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
   /api/EmailActions/applyEmailRequest:
     post:
       tags:
@@ -91,18 +91,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/ApplyEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/ApplyEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/ApplyEmailActionResponseResponseWrapper'
   /api/EmailActions/passwordResetRequest:
     post:
       tags:
@@ -113,18 +113,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
   /api/EmailActions/passwordResetApply:
     post:
       tags:
@@ -139,35 +139,35 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/ApplyEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/ApplyEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/ApplyEmailActionResponseResponseWrapper'
   /api/EmailActions/emailCodeRequest:
     post:
       tags:
         - EmailActions
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
   /api/EmailActions/emailSignInRequest:
     post:
       tags:
@@ -178,35 +178,35 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
   /api/EmailActions/deleteAccountRequest:
     post:
       tags:
         - EmailActions
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
   /api/EmailActions/deleteAccountApply:
     post:
       tags:
@@ -217,18 +217,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/ApplyEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/ApplyEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/ApplyEmailActionResponseResponseWrapper'
   /api/EmailActions/changeEmailRequest:
     post:
       tags:
@@ -239,18 +239,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
   /api/EmailActions/changeEmailApply:
     post:
       tags:
@@ -261,18 +261,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/ApplyEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/ApplyEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/ApplyEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/ApplyEmailActionResponseResponseWrapper'
   /api/EmailTemplates:
     post:
       tags:
@@ -281,26 +281,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateEmailTemplateDTO"
+              $ref: '#/components/schemas/CreateEmailTemplateDTO'
           text/json:
             schema:
-              $ref: "#/components/schemas/CreateEmailTemplateDTO"
+              $ref: '#/components/schemas/CreateEmailTemplateDTO'
           application/*+json:
             schema:
-              $ref: "#/components/schemas/CreateEmailTemplateDTO"
+              $ref: '#/components/schemas/CreateEmailTemplateDTO'
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+                $ref: '#/components/schemas/EmailTemplateDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+                $ref: '#/components/schemas/EmailTemplateDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+                $ref: '#/components/schemas/EmailTemplateDTOResponseWrapper'
     put:
       tags:
         - EmailTemplates
@@ -308,26 +308,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/EmailTemplateDTO"
+              $ref: '#/components/schemas/EmailTemplateDTO'
           text/json:
             schema:
-              $ref: "#/components/schemas/EmailTemplateDTO"
+              $ref: '#/components/schemas/EmailTemplateDTO'
           application/*+json:
             schema:
-              $ref: "#/components/schemas/EmailTemplateDTO"
+              $ref: '#/components/schemas/EmailTemplateDTO'
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+                $ref: '#/components/schemas/EmailTemplateDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+                $ref: '#/components/schemas/EmailTemplateDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+                $ref: '#/components/schemas/EmailTemplateDTOResponseWrapper'
     delete:
       tags:
         - EmailTemplates
@@ -337,36 +337,36 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
   /api/EmailTemplates/all:
     get:
       tags:
         - EmailTemplates
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/EmailTemplateDTOListResponseWrapper"
+                $ref: '#/components/schemas/EmailTemplateDTOListResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/EmailTemplateDTOListResponseWrapper"
+                $ref: '#/components/schemas/EmailTemplateDTOListResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/EmailTemplateDTOListResponseWrapper"
-  "/api/EmailTemplates/{id}":
+                $ref: '#/components/schemas/EmailTemplateDTOListResponseWrapper'
+  '/api/EmailTemplates/{id}':
     get:
       tags:
         - EmailTemplates
@@ -377,35 +377,35 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+                $ref: '#/components/schemas/EmailTemplateDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+                $ref: '#/components/schemas/EmailTemplateDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/EmailTemplateDTOResponseWrapper"
+                $ref: '#/components/schemas/EmailTemplateDTOResponseWrapper'
   /api/Nauth/currentService:
     get:
       tags:
         - Nauth
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOResponseWrapper'
   /api/Nauth/decodeUserToken:
     post:
       tags:
@@ -416,18 +416,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/FullSessionDTOResponseWrapper"
+                $ref: '#/components/schemas/FullSessionDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/FullSessionDTOResponseWrapper"
+                $ref: '#/components/schemas/FullSessionDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/FullSessionDTOResponseWrapper"
+                $ref: '#/components/schemas/FullSessionDTOResponseWrapper'
   /api/Nauth/createServicePermission:
     post:
       tags:
@@ -436,26 +436,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreatePermissionDTO"
+              $ref: '#/components/schemas/CreatePermissionDTO'
           text/json:
             schema:
-              $ref: "#/components/schemas/CreatePermissionDTO"
+              $ref: '#/components/schemas/CreatePermissionDTO'
           application/*+json:
             schema:
-              $ref: "#/components/schemas/CreatePermissionDTO"
+              $ref: '#/components/schemas/CreatePermissionDTO'
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/PermissionDTOResponseWrapper"
+                $ref: '#/components/schemas/PermissionDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/PermissionDTOResponseWrapper"
+                $ref: '#/components/schemas/PermissionDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/PermissionDTOResponseWrapper"
+                $ref: '#/components/schemas/PermissionDTOResponseWrapper'
   /api/Nauth/deleteServicePermission:
     post:
       tags:
@@ -466,19 +466,19 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
-  /api/Nauth/UpdateUserPermissions:
+                $ref: '#/components/schemas/StringResponseWrapper'
+  /api/Nauth/updateUserPermissions:
     post:
       tags:
         - Nauth
@@ -486,26 +486,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ServiceUpdateUserPermissionsDTO"
+              $ref: '#/components/schemas/ServiceUpdateUserPermissionsDTO'
           text/json:
             schema:
-              $ref: "#/components/schemas/ServiceUpdateUserPermissionsDTO"
+              $ref: '#/components/schemas/ServiceUpdateUserPermissionsDTO'
           application/*+json:
             schema:
-              $ref: "#/components/schemas/ServiceUpdateUserPermissionsDTO"
+              $ref: '#/components/schemas/ServiceUpdateUserPermissionsDTO'
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/FullSessionDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/FullSessionDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/FullSessionDTOResponseWrapper'
   /api/Service/create:
     post:
       tags:
@@ -514,26 +514,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateServiceDTO"
+              $ref: '#/components/schemas/CreateServiceDTO'
           text/json:
             schema:
-              $ref: "#/components/schemas/CreateServiceDTO"
+              $ref: '#/components/schemas/CreateServiceDTO'
           application/*+json:
             schema:
-              $ref: "#/components/schemas/CreateServiceDTO"
+              $ref: '#/components/schemas/CreateServiceDTO'
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOResponseWrapper'
   /api/Service/update:
     post:
       tags:
@@ -548,18 +548,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOResponseWrapper'
   /api/Service/getSession:
     post:
       tags:
@@ -575,18 +575,18 @@ paths:
             type: string
             format: date-time
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
   /api/Service/delete:
     post:
       tags:
@@ -597,35 +597,35 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
   /api/Service/getAllGlobal:
     get:
       tags:
         - Service
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/ServiceDTOListResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOListResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/ServiceDTOListResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOListResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/ServiceDTOListResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOListResponseWrapper'
   /api/Service/getbyId:
     get:
       tags:
@@ -636,52 +636,52 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/ServiceDTOResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOResponseWrapper'
   /api/Service/getAllOwned:
     get:
       tags:
         - Service
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/ServiceDTOListResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOListResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/ServiceDTOListResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOListResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/ServiceDTOListResponseWrapper"
+                $ref: '#/components/schemas/ServiceDTOListResponseWrapper'
   /api/Session/revokeCurrent:
     delete:
       tags:
         - Session
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
   /api/Session/revoke:
     delete:
       tags:
@@ -692,103 +692,103 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
   /api/Session/revoke/my:
     delete:
       tags:
         - Session
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
   /api/Session/revoke/allMy:
     delete:
       tags:
         - Session
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
   /api/Session/getMy:
     get:
       tags:
         - Session
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/SessionDTOListResponseWrapper"
+                $ref: '#/components/schemas/SessionDTOListResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/SessionDTOListResponseWrapper"
+                $ref: '#/components/schemas/SessionDTOListResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/SessionDTOListResponseWrapper"
+                $ref: '#/components/schemas/SessionDTOListResponseWrapper'
   /Status:
     get:
       tags:
         - Status
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
   /api/User/currentUser:
     get:
       tags:
         - User
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/User/uploadAvatar:
     post:
       tags:
@@ -806,18 +806,18 @@ paths:
               file:
                 style: form
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/User/register:
     post:
       tags:
@@ -826,26 +826,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateUserDTO"
+              $ref: '#/components/schemas/CreateUserDTO'
           text/json:
             schema:
-              $ref: "#/components/schemas/CreateUserDTO"
+              $ref: '#/components/schemas/CreateUserDTO'
           application/*+json:
             schema:
-              $ref: "#/components/schemas/CreateUserDTO"
+              $ref: '#/components/schemas/CreateUserDTO'
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/User/login:
     post:
       tags:
@@ -854,26 +854,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateUserDTO"
+              $ref: '#/components/schemas/CreateUserDTO'
           text/json:
             schema:
-              $ref: "#/components/schemas/CreateUserDTO"
+              $ref: '#/components/schemas/CreateUserDTO'
           application/*+json:
             schema:
-              $ref: "#/components/schemas/CreateUserDTO"
+              $ref: '#/components/schemas/CreateUserDTO'
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
   /api/User/ContinueWithGoogle:
     get:
       tags:
@@ -884,18 +884,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
   /api/User/loginWithCode:
     post:
       tags:
@@ -910,18 +910,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
   /api/User/setup2FA:
     post:
       tags:
@@ -936,18 +936,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+                $ref: '#/components/schemas/_2FAEntrySetupDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+                $ref: '#/components/schemas/_2FAEntrySetupDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+                $ref: '#/components/schemas/_2FAEntrySetupDTOResponseWrapper'
   /api/User/activate2FA:
     post:
       tags:
@@ -962,18 +962,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/StringResponseWrapper"
+                $ref: '#/components/schemas/StringResponseWrapper'
   /api/User/delete2FAWithRecoveryCode:
     post:
       tags:
@@ -984,18 +984,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+                $ref: '#/components/schemas/_2FAEntrySetupDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+                $ref: '#/components/schemas/_2FAEntrySetupDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+                $ref: '#/components/schemas/_2FAEntrySetupDTOResponseWrapper'
   /api/User/activateSession:
     post:
       tags:
@@ -1006,18 +1006,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+                $ref: '#/components/schemas/_2FAEntrySetupDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+                $ref: '#/components/schemas/_2FAEntrySetupDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+                $ref: '#/components/schemas/_2FAEntrySetupDTOResponseWrapper'
   /api/User/delete2FAWithCode:
     post:
       tags:
@@ -1032,18 +1032,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+                $ref: '#/components/schemas/_2FAEntrySetupDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+                $ref: '#/components/schemas/_2FAEntrySetupDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/_2FAEntrySetupDTOResponseWrapper"
+                $ref: '#/components/schemas/_2FAEntrySetupDTOResponseWrapper'
   /api/User/updateUserName:
     post:
       tags:
@@ -1052,43 +1052,43 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateNameDTO"
+              $ref: '#/components/schemas/UpdateNameDTO'
           text/json:
             schema:
-              $ref: "#/components/schemas/UpdateNameDTO"
+              $ref: '#/components/schemas/UpdateNameDTO'
           application/*+json:
             schema:
-              $ref: "#/components/schemas/UpdateNameDTO"
+              $ref: '#/components/schemas/UpdateNameDTO'
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/UserManagement/fetchPermissions:
     get:
       tags:
         - UserManagement
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/PermissionDTOListResponseWrapper"
+                $ref: '#/components/schemas/PermissionDTOListResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/PermissionDTOListResponseWrapper"
+                $ref: '#/components/schemas/PermissionDTOListResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/PermissionDTOListResponseWrapper"
+                $ref: '#/components/schemas/PermissionDTOListResponseWrapper'
   /api/UserManagement/fetchUsers:
     get:
       tags:
@@ -1111,18 +1111,18 @@ paths:
             format: int32
             default: 20
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOListResponseWrapper"
+                $ref: '#/components/schemas/UserDTOListResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOListResponseWrapper"
+                $ref: '#/components/schemas/UserDTOListResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOListResponseWrapper"
+                $ref: '#/components/schemas/UserDTOListResponseWrapper'
   /api/UserManagement/updatePermissions:
     post:
       tags:
@@ -1131,26 +1131,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserDTO"
+              $ref: '#/components/schemas/UserDTO'
           text/json:
             schema:
-              $ref: "#/components/schemas/UserDTO"
+              $ref: '#/components/schemas/UserDTO'
           application/*+json:
             schema:
-              $ref: "#/components/schemas/UserDTO"
+              $ref: '#/components/schemas/UserDTO'
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/UserManagement/deleteUser:
     post:
       tags:
@@ -1161,18 +1161,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/UserManagement/forceVerifyEmail:
     post:
       tags:
@@ -1183,18 +1183,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/UserManagement/forceUnVerifyEmail:
     post:
       tags:
@@ -1205,18 +1205,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/UserManagement/disableUser:
     post:
       tags:
@@ -1227,18 +1227,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/UserManagement/enableUser:
     post:
       tags:
@@ -1249,18 +1249,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/UserManagement/setUserEmail:
     post:
       tags:
@@ -1275,18 +1275,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/UserManagement/setUserPassword:
     post:
       tags:
@@ -1301,18 +1301,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/UserManagement/revokeAllUserSessions:
     post:
       tags:
@@ -1323,18 +1323,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/UserManagement/updateUserName:
     post:
       tags:
@@ -1343,26 +1343,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AdminUpdateUserNameDTO"
+              $ref: '#/components/schemas/AdminUpdateUserNameDTO'
           text/json:
             schema:
-              $ref: "#/components/schemas/AdminUpdateUserNameDTO"
+              $ref: '#/components/schemas/AdminUpdateUserNameDTO'
           application/*+json:
             schema:
-              $ref: "#/components/schemas/AdminUpdateUserNameDTO"
+              $ref: '#/components/schemas/AdminUpdateUserNameDTO'
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/UserDTOResponseWrapper"
+                $ref: '#/components/schemas/UserDTOResponseWrapper'
   /api/UserManagement/neutralizeEmailAction:
     post:
       tags:
@@ -1373,18 +1373,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/NeutralizeEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/NeutralizeEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/NeutralizeEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/NeutralizeEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/NeutralizeEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/NeutralizeEmailActionResponseResponseWrapper'
   /api/UserManagement/verifyEmailRequest:
     post:
       tags:
@@ -1395,18 +1395,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
   /api/UserManagement/passwordResetRequest:
     post:
       tags:
@@ -1417,18 +1417,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
   /api/UserManagement/deleteAccountRequest:
     post:
       tags:
@@ -1439,18 +1439,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
   /api/UserManagement/changeEmailRequest:
     post:
       tags:
@@ -1465,18 +1465,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             application/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
             text/json:
               schema:
-                $ref: "#/components/schemas/RequestEmailActionResponseResponseWrapper"
+                $ref: '#/components/schemas/RequestEmailActionResponseResponseWrapper'
 components:
   schemas:
     AdminUpdateUserNameDTO:
@@ -1499,14 +1499,14 @@ components:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
-          $ref: "#/components/schemas/ApplyEmailActionResponse"
+          $ref: '#/components/schemas/ApplyEmailActionResponse'
       additionalProperties: false
     AuthFailureReasons:
       enum:
@@ -1530,7 +1530,7 @@ components:
         isActive:
           type: boolean
         type:
-          $ref: "#/components/schemas/EmailTemplateType"
+          $ref: '#/components/schemas/EmailTemplateType'
         subject:
           type: string
           nullable: true
@@ -1584,12 +1584,12 @@ components:
           type: string
           nullable: true
         user:
-          $ref: "#/components/schemas/UserBasicDTO"
+          $ref: '#/components/schemas/UserBasicDTO'
         data:
           type: string
           nullable: true
         type:
-          $ref: "#/components/schemas/EmailActionType"
+          $ref: '#/components/schemas/EmailActionType'
         expiresAt:
           type: string
           format: date-time
@@ -1601,14 +1601,14 @@ components:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
-          $ref: "#/components/schemas/DecodedEmailActionDTO"
+          $ref: '#/components/schemas/DecodedEmailActionDTO'
       additionalProperties: false
     EmailActionDTO:
       type: object
@@ -1623,7 +1623,7 @@ components:
           type: string
           nullable: true
         type:
-          $ref: "#/components/schemas/EmailActionType"
+          $ref: '#/components/schemas/EmailActionType'
         expiresAt:
           type: string
           format: date-time
@@ -1635,16 +1635,16 @@ components:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
           type: array
           items:
-            $ref: "#/components/schemas/EmailActionDTO"
+            $ref: '#/components/schemas/EmailActionDTO'
           nullable: true
       additionalProperties: false
     EmailActionType:
@@ -1668,7 +1668,7 @@ components:
         isActive:
           type: boolean
         type:
-          $ref: "#/components/schemas/EmailTemplateType"
+          $ref: '#/components/schemas/EmailTemplateType'
         subject:
           type: string
           nullable: true
@@ -1686,30 +1686,30 @@ components:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
           type: array
           items:
-            $ref: "#/components/schemas/EmailTemplateDTO"
+            $ref: '#/components/schemas/EmailTemplateDTO'
           nullable: true
       additionalProperties: false
     EmailTemplateDTOResponseWrapper:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
-          $ref: "#/components/schemas/EmailTemplateDTO"
+          $ref: '#/components/schemas/EmailTemplateDTO'
       additionalProperties: false
     EmailTemplateType:
       enum:
@@ -1753,22 +1753,22 @@ components:
           type: string
           nullable: true
         service:
-          $ref: "#/components/schemas/ServiceDTO"
+          $ref: '#/components/schemas/ServiceDTO'
         user:
-          $ref: "#/components/schemas/UserDTO"
+          $ref: '#/components/schemas/UserDTO'
       additionalProperties: false
     FullSessionDTOResponseWrapper:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
-          $ref: "#/components/schemas/FullSessionDTO"
+          $ref: '#/components/schemas/FullSessionDTO'
       additionalProperties: false
     NeutralizeEmailActionResponse:
       type: object
@@ -1780,14 +1780,14 @@ components:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
-          $ref: "#/components/schemas/NeutralizeEmailActionResponse"
+          $ref: '#/components/schemas/NeutralizeEmailActionResponse'
       additionalProperties: false
     PermissionBasicDTO:
       type: object
@@ -1827,36 +1827,36 @@ components:
           type: string
           format: date-time
         service:
-          $ref: "#/components/schemas/ServiceBasicDTO"
+          $ref: '#/components/schemas/ServiceBasicDTO'
       additionalProperties: false
     PermissionDTOListResponseWrapper:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
           type: array
           items:
-            $ref: "#/components/schemas/PermissionDTO"
+            $ref: '#/components/schemas/PermissionDTO'
           nullable: true
       additionalProperties: false
     PermissionDTOResponseWrapper:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
-          $ref: "#/components/schemas/PermissionDTO"
+          $ref: '#/components/schemas/PermissionDTO'
       additionalProperties: false
     RequestAction:
       enum:
@@ -1877,14 +1877,14 @@ components:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
-          $ref: "#/components/schemas/RequestEmailActionResponse"
+          $ref: '#/components/schemas/RequestEmailActionResponse'
       additionalProperties: false
     ServiceBasicDTO:
       type: object
@@ -1915,49 +1915,49 @@ components:
           type: string
           nullable: true
         user:
-          $ref: "#/components/schemas/UserBasicDTO"
+          $ref: '#/components/schemas/UserBasicDTO'
         createdAt:
           type: string
           format: date-time
         sessions:
           type: array
           items:
-            $ref: "#/components/schemas/SessionBasicDTO"
+            $ref: '#/components/schemas/SessionBasicDTO'
           nullable: true
         permissions:
           type: array
           items:
-            $ref: "#/components/schemas/PermissionBasicDTO"
+            $ref: '#/components/schemas/PermissionBasicDTO'
           nullable: true
       additionalProperties: false
     ServiceDTOListResponseWrapper:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
           type: array
           items:
-            $ref: "#/components/schemas/ServiceDTO"
+            $ref: '#/components/schemas/ServiceDTO'
           nullable: true
       additionalProperties: false
     ServiceDTOResponseWrapper:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
-          $ref: "#/components/schemas/ServiceDTO"
+          $ref: '#/components/schemas/ServiceDTO'
       additionalProperties: false
     ServicePermissionOnUserUpdateDTOInner:
       type: object
@@ -1966,7 +1966,7 @@ components:
           type: string
           nullable: true
         action:
-          $ref: "#/components/schemas/RequestAction"
+          $ref: '#/components/schemas/RequestAction'
       additionalProperties: false
     ServiceUpdateUserPermissionsDTO:
       type: object
@@ -1974,10 +1974,13 @@ components:
         userId:
           type: string
           nullable: true
+        sessionId:
+          type: string
+          nullable: true
         permissions:
           type: array
           items:
-            $ref: "#/components/schemas/ServicePermissionOnUserUpdateDTOInner"
+            $ref: '#/components/schemas/ServicePermissionOnUserUpdateDTOInner'
           nullable: true
       additionalProperties: false
     SessionBasicDTO:
@@ -2046,33 +2049,33 @@ components:
           type: string
           nullable: true
         service:
-          $ref: "#/components/schemas/ServiceBasicDTO"
+          $ref: '#/components/schemas/ServiceBasicDTO'
       additionalProperties: false
     SessionDTOListResponseWrapper:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
           type: array
           items:
-            $ref: "#/components/schemas/SessionDTO"
+            $ref: '#/components/schemas/SessionDTO'
           nullable: true
       additionalProperties: false
     StringResponseWrapper:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
           type: string
@@ -2126,57 +2129,57 @@ components:
         emailActions:
           type: array
           items:
-            $ref: "#/components/schemas/EmailActionDTO"
+            $ref: '#/components/schemas/EmailActionDTO'
           nullable: true
         sessions:
           type: array
           items:
-            $ref: "#/components/schemas/SessionDTO"
+            $ref: '#/components/schemas/SessionDTO'
           nullable: true
         permissions:
           type: array
           items:
-            $ref: "#/components/schemas/UserPermissionDTO"
+            $ref: '#/components/schemas/UserPermissionDTO'
           nullable: true
         services:
           type: array
           items:
-            $ref: "#/components/schemas/ServiceDTO"
+            $ref: '#/components/schemas/ServiceDTO'
           nullable: true
         twoFactorAuthEntries:
           type: array
           items:
-            $ref: "#/components/schemas/_2FAEntryDTO"
+            $ref: '#/components/schemas/_2FAEntryDTO'
           nullable: true
       additionalProperties: false
     UserDTOListResponseWrapper:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
           type: array
           items:
-            $ref: "#/components/schemas/UserDTO"
+            $ref: '#/components/schemas/UserDTO'
           nullable: true
       additionalProperties: false
     UserDTOResponseWrapper:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
-          $ref: "#/components/schemas/UserDTO"
+          $ref: '#/components/schemas/UserDTO'
       additionalProperties: false
     UserPermissionDTO:
       type: object
@@ -2194,13 +2197,14 @@ components:
           type: string
           format: date-time
         permission:
-          $ref: "#/components/schemas/PermissionBasicDTO"
+          $ref: '#/components/schemas/PermissionBasicDTO'
       additionalProperties: false
     WrResponseStatus:
       enum:
         - InternalError
         - Ok
         - Forbidden
+        - _2FARequired
         - Unauthorized
         - NotFound
         - BadRequest
@@ -2247,12 +2251,12 @@ components:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/WrResponseStatus"
+          $ref: '#/components/schemas/WrResponseStatus'
         authenticationFailureReasons:
           type: array
           items:
-            $ref: "#/components/schemas/AuthFailureReasons"
+            $ref: '#/components/schemas/AuthFailureReasons'
           nullable: true
         response:
-          $ref: "#/components/schemas/_2FAEntrySetupDTO"
+          $ref: '#/components/schemas/_2FAEntrySetupDTO'
       additionalProperties: false

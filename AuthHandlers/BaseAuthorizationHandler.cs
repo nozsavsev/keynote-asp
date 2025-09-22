@@ -8,11 +8,19 @@ namespace keynote_asp.AuthHandlers
     public abstract class BaseAuthorizationHandler<TRequirement> : AuthorizationHandler<TRequirement>
         where TRequirement : BaseAuthorizationRequirement
     {
+        protected ILogger Logger { get; }
+
+        protected BaseAuthorizationHandler(ILogger logger)
+        {
+            Logger = logger;
+        }
+
         protected override Task HandleRequirementAsync(
             AuthorizationHandlerContext context,
             TRequirement requirement)
         {
-            if (context.User == null || !context.User.Identity.IsAuthenticated)
+            
+            if (context.User == null || !context!.User!.Identity!.IsAuthenticated)
             {
                 context.Fail();
                 return Task.CompletedTask;
@@ -34,6 +42,7 @@ namespace keynote_asp.AuthHandlers
                 context.Fail();
                 return Task.CompletedTask;
             }
+
 
             // Check email verification
             if (requirement.RequireEmailVerified && !(nauthUser.IsEmailVerified ?? false))
@@ -58,6 +67,7 @@ namespace keynote_asp.AuthHandlers
                 context.Fail();
                 return Task.CompletedTask;
             }
+
 
             return HandleAdditionalRequirementsAsync(context, requirement, httpContext);
         }

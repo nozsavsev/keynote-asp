@@ -5,6 +5,10 @@ namespace keynote_asp.AuthHandlers
 {
     public class HasPermissionHandler : BaseAuthorizationHandler<HasPermissionRequirement>
     {
+        public HasPermissionHandler(ILogger<HasPermissionHandler> logger) : base(logger)
+        {
+        }
+
         protected override Task HandleAdditionalRequirementsAsync(
             AuthorizationHandlerContext context,
             HasPermissionRequirement requirement,
@@ -19,6 +23,7 @@ namespace keynote_asp.AuthHandlers
             }
             else
             {
+                httpContext.AddAuthenticationFailureReason(AuthFailureReasons.ForeginResource);
                 context.Fail();
             }
 

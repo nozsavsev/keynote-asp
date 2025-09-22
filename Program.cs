@@ -17,6 +17,7 @@ using Microsoft.Kiota.Http.HttpClientLibrary;
 using Keynote_asp.Nauth.API_GEN;
 using Microsoft.Kiota.Abstractions;
 using keynote_asp.Helpers;
+using Keynote_asp.Nauth.API_GEN.Models;
 
 namespace keynote_asp
 {
@@ -62,19 +63,15 @@ namespace keynote_asp
 
             // Register Repositories
             builder.Services.AddScoped<UserRepository>();
-            builder.Services.AddScoped<PermissionRepository>();
             builder.Services.AddScoped<KeynoteRepository>();
-            builder.Services.AddScoped<UserPermissionRepository>();
 
             // Register Services
             builder.Services.AddScoped<IObjectStorageService, ObjectStorageService>();
-            builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddScoped<PermissionService>();
-            builder.Services.AddScoped<IKeynoteService, KeynoteService>();
-            builder.Services.AddScoped<IUserPermissionService, UserPermissionService>();
+            builder.Services.AddScoped<UserService>();
+            builder.Services.AddScoped<KeynoteService>();
 
             builder.Services.AddMemoryCache();
-            builder.Services.AddScoped<ICachedCurrentService, CachedCurrentService>();
+            builder.Services.AddScoped<CachedCurrentService>();
             builder.Services.AddScoped<INauthApiService, NauthApiService>();
 
             // Configure Nauth API Client
@@ -132,7 +129,7 @@ namespace keynote_asp
                 .AddAuthentication("NauthScheme")
                 .AddScheme<NauthAuthenticationOptions, NauthAuthenticationHandler>("NauthScheme", options =>
                 {
-                    options.CookieKey = builder.Configuration["JWT:Cookiekey"] ?? "auth_token";
+                    options.CookieKey = builder.Configuration["JWT:Cookiekey"] ?? "nauth";
                 });
 
             // Configure Authorization
@@ -158,13 +155,6 @@ namespace keynote_asp
                         require2FAConfirmed: true));
                 });
 
-                // Policy for user owns keynote
-                options.AddPolicy("UserOwnsKeynote", policy =>
-                {
-                    policy.AuthenticationSchemes.Add("NauthScheme");
-                    policy.RequireAuthenticatedUser();
-                    policy.AddRequirements(new UserOwnsKeynoteRequirement());
-                });
 
                 // Create policies for each Keynote permission
                 foreach (KeynotePermissions permission in Enum.GetValues(typeof(KeynotePermissions)))
@@ -180,6 +170,7 @@ namespace keynote_asp
             });
 
             // Register Authorization Handlers
+            builder.Services.AddScoped<IAuthorizationHandler, BaseRequirementHandler>();
             builder.Services.AddScoped<IAuthorizationHandler, HasPermissionHandler>();
             builder.Services.AddScoped<IAuthorizationHandler, UserOwnsKeynoteHandler>();
 
@@ -203,22 +194,32 @@ namespace keynote_asp
                 var requestServices = context.HttpContext.RequestServices;
                 var config = requestServices.GetRequiredService<IConfiguration>();
                 var jsonOptions = requestServices.GetRequiredService<JsonSerializerOptions>();
+                var logger = requestServices.GetRequiredService<ILogger<Program>>();
 
                 response.ContentType = "application/json";
 
                 if (response.StatusCode == 403)
                 {
                     var reasons = context.HttpContext.GetAuthenticationFailureReasons();
+                    
                     await response.WriteAsync(JsonSerializer.Serialize(
                         new ResponseWrapper<string>(WrResponseStatus.Forbidden, null, reasons), 
                         jsonOptions));
                 }
                 else if (response.StatusCode == 401)
                 {
+                    
                     await response.WriteAsync(JsonSerializer.Serialize(
                         new ResponseWrapper<string>(WrResponseStatus.Unauthorized), 
                         jsonOptions));
                 }
+            });
+
+            // Add request logging middleware
+            app.Use(async (context, next) =>
+            {
+                var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+                await next();
             });
 
             app.UseAuthentication();
@@ -230,8 +231,24 @@ namespace keynote_asp
             // Initialize permissions on startup
             using (var scope = app.Services.CreateScope())
             {
-                var permissionService = scope.ServiceProvider.GetRequiredService<PermissionService>();
-                await permissionService.InjectPermissions();
+                var nauthAPI = scope.ServiceProvider.GetRequiredService<INauthApiService>();
+                var currentService = scope.ServiceProvider.GetRequiredService<CachedCurrentService>();
+
+                var service = await currentService.GetCurrentServiceAsync();
+
+                foreach (var name in  Enum.GetNames<KeynotePermissions>())
+                {
+
+                    var permission = new CreatePermissionDTO();
+
+                    permission.ServiceId = service!.Id!.ToString();
+                    permission.Key = name;
+                    permission.Name = name.Replace("Pr", "").SplitPascalCase();
+
+                    await nauthAPI.CreateServicePermissionAsync(permission);
+
+                }
+
             }
 
             await app.RunAsync();
@@ -255,7 +272,9 @@ namespace keynote_asp
         {
             try
             {
+                Console.WriteLine("ErrorHandlerMiddleware invoked.");
                 await _next(context);
+                Console.WriteLine("ErrorHandlerMiddleware invoked.");
             }
             catch (Exception error)
             {

@@ -20,6 +20,10 @@ namespace Keynote_asp.Nauth.API_GEN.Models
         #pragma warning disable CS1591
         Forbidden,
         #pragma warning restore CS1591
+        [EnumMember(Value = "_2FARequired")]
+        #pragma warning disable CS1591
+        _2FARequired,
+        #pragma warning restore CS1591
         [EnumMember(Value = "Unauthorized")]
         #pragma warning disable CS1591
         Unauthorized,

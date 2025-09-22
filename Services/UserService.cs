@@ -3,7 +3,7 @@ using keynote_asp.Repositories;
 
 namespace keynote_asp.Services
 {
-    public class UserService : GenericService<DB_User>, IUserService
+    public class UserService : GenericService<DB_User>
     {
         public UserService(UserRepository repository) : base(repository)
         {

@@ -5,7 +5,7 @@ namespace keynote_asp.Dtos
 {
     public class KeynoteUserDTO
     {
-        public string Id { get; set; }
-        public ICollection<KeynoteDTO> Keynotes { get; set; }
+        public string Id { get; set; } = null!;
+        public List<KeynoteDTO> Keynotes { get; set; } = new();
     }
 }

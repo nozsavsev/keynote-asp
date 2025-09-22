@@ -81,6 +81,7 @@ namespace keynote_asp.Repositories
             }
             catch (KeynoteException ex)
             {
+                Console.WriteLine(ex);
                 throw;
             }
             catch (Exception ex)

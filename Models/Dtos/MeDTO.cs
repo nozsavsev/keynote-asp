@@ -6,7 +6,7 @@ namespace keynote_asp.Dtos
 {
     public class MeDTO
     {
-        public KeynoteUserDTO KeynoteUser { get; set; }
-        public UserDTO NauthUser { get; set; }
+        public KeynoteUserDTO KeynoteUser { get; set; } = null!;
+        public UserDTO NauthUser { get; set; } = null!;
     }
 }

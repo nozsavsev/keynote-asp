@@ -21,6 +21,7 @@ namespace keynote_asp.AuthHandlers
         private readonly INauthApiService _nauthApiService;
         private readonly UserRepository _userRepository;
         private readonly ILogger<NauthAuthenticationHandler> _logger;
+        private readonly CachedCurrentService _currentService;
 
         public NauthAuthenticationHandler(
             IOptionsMonitor<NauthAuthenticationOptions> options,
@@ -28,20 +29,24 @@ namespace keynote_asp.AuthHandlers
             UrlEncoder encoder,
             INauthApiService nauthApiService,
             UserRepository userRepository,
-            ILogger<NauthAuthenticationHandler> logger)
+            ILogger<NauthAuthenticationHandler> logger,
+             CachedCurrentService currentService)
             : base(options, logger_factory, encoder)
         {
             _nauthApiService = nauthApiService;
             _userRepository = userRepository;
             _logger = logger;
+            _currentService = currentService;
+
         }
 
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            string token = null;
+
+            string? token = null;
 
             // Try to get token from Authorization header
-            string authorization = Request.Headers["Authorization"];
+            string? authorization = Request.Headers["Authorization"];
             if (!string.IsNullOrEmpty(authorization) && authorization.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
             {
                 token = authorization.Substring("Bearer ".Length).Trim();
@@ -63,26 +68,59 @@ namespace keynote_asp.AuthHandlers
 
                 if (decodeResult?.Response?.User == null || decodeResult?.Response == null)
                 {
-                    _logger.LogWarning("Nauth API returned invalid session for token. Status: {Status}, FailureReasons: {FailureReasons}", 
-                        decodeResult?.Status, decodeResult?.AuthenticationFailureReasons);
                     Context.Items["AuthFailureReason"] = AuthFailureReasons.SessionExpired;
                     return AuthenticateResult.Fail("Invalid session");
                 }
-                
+
                 var nauthUser = decodeResult.Response.User;
                 var nauthSession = decodeResult.Response;
+
 
                 // Store nauth user and session in HttpContext
                 Context.Items["NauthUser"] = nauthUser;
                 Context.Items["NauthSession"] = nauthSession;
 
                 // Get or create keynote user
-                var keynoteUserId = int.Parse(nauthUser.Id!);
+                var keynoteUserId = long.Parse(nauthUser.Id!);
                 var keynoteUser = await _userRepository.GetByIdAsync(keynoteUserId);
-                
+
                 if (keynoteUser == null)
                 {
                     keynoteUser = await _userRepository.AddAsync(new DB_User { Id = keynoteUserId });
+
+                    var PermissionId = _currentService.getPermission(KeynotePermissions.PrUploadFiles)!.Result!.Id!.ToString();
+
+                    if (nauthUser!.Permissions!.Where(p => p.PermissionId == PermissionId).Count() == 0)
+                    {
+                        var service = await _currentService.GetCurrentServiceAsync();
+
+                        var toUpdate = new List<ServicePermissionOnUserUpdateDTOInner>();
+
+                        toUpdate.Add(new ServicePermissionOnUserUpdateDTOInner
+                        {
+                            PermissionId = PermissionId,
+                            Action = RequestAction.Add
+                        });
+
+                        var up = new ServiceUpdateUserPermissionsDTO
+                        {
+                            UserId = nauthUser.Id!,
+                            SessionId = nauthSession.Id!,
+                            Permissions = toUpdate
+                        };
+
+                        var response = (await _nauthApiService.UpdateUserPermissionsAsync(up))?.Response;
+
+                        nauthUser = response?.User;
+
+                        if (nauthUser == null)
+                        {
+                            Context.Items["AuthFailureReason"] = AuthFailureReasons.SessionExpired;
+                            return AuthenticateResult.Fail("Invalid session");
+                        }
+                        else
+                            Context.Items["NauthUser"] = nauthUser;
+                    }
                 }
 
                 // Store keynote user in context
@@ -124,7 +162,6 @@ namespace keynote_asp.AuthHandlers
             }
             catch (Exception ex) // This will now only catch unexpected errors, not API error responses
             {
-                _logger.LogError(ex, "Authentication failed due to an unexpected exception");
                 return AuthenticateResult.Fail($"Authentication failed: {ex.Message}");
             }
         }

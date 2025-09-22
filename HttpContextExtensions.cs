@@ -1,5 +1,5 @@
-﻿using Keynote_asp.Nauth.API_GEN.Models;
-using keynote_asp.Models.User;
+﻿using keynote_asp.Models.User;
+using Keynote_asp.Nauth.API_GEN.Models;
 
 namespace keynote_asp
 {

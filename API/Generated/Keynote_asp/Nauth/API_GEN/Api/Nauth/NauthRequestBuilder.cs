@@ -39,7 +39,7 @@ namespace Keynote_asp.Nauth.API_GEN.Api.Nauth
         {
             get => new global::Keynote_asp.Nauth.API_GEN.Api.Nauth.DeleteServicePermission.DeleteServicePermissionRequestBuilder(PathParameters, RequestAdapter);
         }
-        /// <summary>The UpdateUserPermissions property</summary>
+        /// <summary>The updateUserPermissions property</summary>
         public global::Keynote_asp.Nauth.API_GEN.Api.Nauth.UpdateUserPermissions.UpdateUserPermissionsRequestBuilder UpdateUserPermissions
         {
             get => new global::Keynote_asp.Nauth.API_GEN.Api.Nauth.UpdateUserPermissions.UpdateUserPermissionsRequestBuilder(PathParameters, RequestAdapter);

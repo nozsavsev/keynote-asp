@@ -20,6 +20,14 @@ namespace Keynote_asp.Nauth.API_GEN.Models
 #else
         public List<global::Keynote_asp.Nauth.API_GEN.Models.ServicePermissionOnUserUpdateDTOInner> Permissions { get; set; }
 #endif
+        /// <summary>The sessionId property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SessionId { get; set; }
+#nullable restore
+#else
+        public string SessionId { get; set; }
+#endif
         /// <summary>The userId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -47,6 +55,7 @@ namespace Keynote_asp.Nauth.API_GEN.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "permissions", n => { Permissions = n.GetCollectionOfObjectValues<global::Keynote_asp.Nauth.API_GEN.Models.ServicePermissionOnUserUpdateDTOInner>(global::Keynote_asp.Nauth.API_GEN.Models.ServicePermissionOnUserUpdateDTOInner.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "sessionId", n => { SessionId = n.GetStringValue(); } },
                 { "userId", n => { UserId = n.GetStringValue(); } },
             };
         }
@@ -58,6 +67,7 @@ namespace Keynote_asp.Nauth.API_GEN.Models
         {
             _ = writer ?? throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Keynote_asp.Nauth.API_GEN.Models.ServicePermissionOnUserUpdateDTOInner>("permissions", Permissions);
+            writer.WriteStringValue("sessionId", SessionId);
             writer.WriteStringValue("userId", UserId);
         }
     }
