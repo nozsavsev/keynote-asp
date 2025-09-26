@@ -22,7 +22,10 @@ namespace keynote_asp.Dtos
 
     public class CreateKeynoteDTO
     {
-        //add 3 files field
+        public IFormFile? Keynote { get; set; }
+        public IFormFile? MobileKeynote { get; set; }
+        public IFormFile? PresentorNotes { get; set; }
+
         public KeynoteTransitionType TransitionType { get; set; } = KeynoteTransitionType.none;
         public KeynoteType Type { get; set; } = KeynoteType.Pdf;
         public int TotalFrames { get; set; } = 0;

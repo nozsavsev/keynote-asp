@@ -9,7 +9,7 @@ using keynote_asp.SignalRHubs;
 
 namespace keynote_asp.Services
 {
-    public class PresentorRTService(KeynoteHub hub, KeynoteService keynoteService)
+    public class PresentorRTService(BaseHub hub, KeynoteService keynoteService)
     {
         public TR_Room CreateRoom(TR_Presentor presentor)
         {

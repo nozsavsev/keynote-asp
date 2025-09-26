@@ -10,19 +10,28 @@ namespace keynote_asp.Services.Transient
     {
         private static readonly ConcurrentDictionary<string, T> _items = new();
 
-        public static T GetById(string id)
+        public static T? GetById(string id)
         {
-            return _items[id];
+            _items.TryGetValue(id, out var item);
+            return item;
         }
 
- public static T? GetByRoomCode(string roomCode)
+        public static T? GetByRoomCode(string roomCode)
         {
             return _items.Values.FirstOrDefault(x => x.RoomCode == roomCode);
         }
 
         public static T GetOrCreate(string id)
         {
-            return _items.GetOrAdd(id, new T());
+            // First check if entity exists
+            if (id != null && _items.TryGetValue(id, out var existingItem))
+            {
+                return existingItem;
+            }
+
+            // If not found, create new entity with constructor-generated ID
+            var newItem = new T();
+            return _items.GetOrAdd(newItem.Identifier, newItem);
         }
 
         public static T AddOrUpdate(T item)
@@ -48,6 +57,12 @@ namespace keynote_asp.Services.Transient
         public static void joinRoom(string id, string roomCode)
         {
             var item = GetById(id);
+            if (item == null) return; // Item doesn't exist, silently fail
+            
+            // Check if room exists by looking for any entity with this room code
+            var roomExists = _items.Values.Any(x => x.RoomCode == roomCode);
+            if (!roomExists) return; // Room doesn't exist, silently fail
+            
             item.RoomCode = roomCode;
             AddOrUpdate(item);
         }

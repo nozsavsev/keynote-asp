@@ -38,7 +38,7 @@ namespace keynote_asp.Controllers
         /// Returns all keynote-related DTOs for Swagger documentation
         /// </summary>
         [HttpGet("keynote-dtos")]
-        public ActionResult<ResponseWrapper<KeynoteDtosResponse>> GetKeynoteDtos()
+        public ActionResult<ResponseWrapper<KeynoteDtosResponse>> GetKeynoteDtos(KeynoteDtosResponse dtos)
         {
             var response = new KeynoteDtosResponse
             {
@@ -55,7 +55,7 @@ namespace keynote_asp.Controllers
         /// Returns all enum types used in the application
         /// </summary>
         [HttpGet("enums")]
-        public ActionResult<ResponseWrapper<EnumsResponse>> GetEnums()
+        public ActionResult<ResponseWrapper<EnumsResponse>> GetEnums(EnumsResponse enums)
         {
             var response = new EnumsResponse
             {
@@ -72,7 +72,7 @@ namespace keynote_asp.Controllers
         /// Returns all list/array DTOs for Swagger documentation
         /// </summary>
         [HttpGet("list-dtos")]
-        public ActionResult<ResponseWrapper<ListDtosResponse>> GetListDtos()
+        public ActionResult<ResponseWrapper<ListDtosResponse>> GetListDtos(ListDtosResponse lists)
         {
             var response = new ListDtosResponse
             {
@@ -81,31 +81,9 @@ namespace keynote_asp.Controllers
                 ScreenList = new List<TR_ScreenDTO>(),
                 SpectatorList = new List<TR_SpectatorDTO>(),
                 KeynoteList = new List<KeynoteDTO>(),
-                UserList = new List<UserDTO>(),
-                SessionList = new List<SessionDTO>(),
-                ServiceList = new List<ServiceDTO>(),
-                PermissionList = new List<PermissionDTO>(),
-                EmailTemplateList = new List<EmailTemplateDTO>(),
-                EmailActionList = new List<EmailActionDTO>()
             };
 
             return Ok(new ResponseWrapper<ListDtosResponse>(WrResponseStatus.Ok, response));
-        }
-
-        /// <summary>
-        /// Returns session identifiers for cookie-based authentication
-        /// </summary>
-        [HttpGet("session-identifiers")]
-        public ActionResult<ResponseWrapper<SessionIdentifiersResponse>> GetSessionIdentifiers()
-        {
-            var response = new SessionIdentifiersResponse
-            {
-                ScreenIdentifier = "screen_123456",
-                SpectatorIdentifier = "spectator_123456",
-                PresentorSessionId = "nauth_session_123456"
-            };
-
-            return Ok(new ResponseWrapper<SessionIdentifiersResponse>(WrResponseStatus.Ok, response));
         }
     }
 
@@ -142,20 +120,8 @@ namespace keynote_asp.Controllers
         public List<TR_ScreenDTO> ScreenList { get; set; } = new();
         public List<TR_SpectatorDTO> SpectatorList { get; set; } = new();
         public List<KeynoteDTO> KeynoteList { get; set; } = new();
-        public List<UserDTO> UserList { get; set; } = new();
-        public List<SessionDTO> SessionList { get; set; } = new();
-        public List<ServiceDTO> ServiceList { get; set; } = new();
-        public List<PermissionDTO> PermissionList { get; set; } = new();
-        public List<EmailTemplateDTO> EmailTemplateList { get; set; } = new();
-        public List<EmailActionDTO> EmailActionList { get; set; } = new();
     }
 
-    public class SessionIdentifiersResponse
-    {
-        public string ScreenIdentifier { get; set; } = string.Empty;
-        public string SpectatorIdentifier { get; set; } = string.Empty;
-        public string PresentorSessionId { get; set; } = string.Empty;
-    }
 
     #endregion
 }

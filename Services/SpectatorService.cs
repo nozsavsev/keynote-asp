@@ -9,7 +9,7 @@ using keynote_asp.SignalRHubs;
 
 namespace keynote_asp.Services
 {
-    public class SpectatorRTService(KeynoteHub hub, KeynoteService keynoteService)
+    public class SpectatorRTService(BaseHub hub, KeynoteService keynoteService)
     {
         public TR_Spectator SetHandRaised(TR_Spectator spectator)
         {

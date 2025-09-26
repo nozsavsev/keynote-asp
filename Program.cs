@@ -226,7 +226,9 @@ namespace keynote_asp
             app.UseAuthorization();
 
             app.MapControllers();
-            app.MapHub<SignalRHubs.KeynoteHub>("/authhub");
+            app.MapHub<SignalRHubs.PresentorHub>("/presentorHub");
+            app.MapHub<SignalRHubs.ScreenHub>("/screenHub");
+            app.MapHub<SignalRHubs.SpectatorHub>("/spectatorHub");
 
             // Initialize permissions on startup
             using (var scope = app.Services.CreateScope())
@@ -272,9 +274,7 @@ namespace keynote_asp
         {
             try
             {
-                Console.WriteLine("ErrorHandlerMiddleware invoked.");
                 await _next(context);
-                Console.WriteLine("ErrorHandlerMiddleware invoked.");
             }
             catch (Exception error)
             {

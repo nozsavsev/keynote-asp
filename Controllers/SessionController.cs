@@ -16,17 +16,18 @@ namespace keynote_asp.Controllers
         {
             try
             {
-                // Create a new screen object
-                var screen = new TR_Screen();
-                ScreenService.AddOrUpdate(screen);
+                Request.Cookies.TryGetValue("ScreenIdentifier", out var identity);
+                var screen = ScreenService.GetOrCreate(identity!);
 
                 // Set the screen identifier as a cookie
+                // Replace this in both GetScreenSession and GetSpectatorSession:
                 var cookieOptions = new CookieOptions
                 {
                     HttpOnly = true,
                     Secure = true,
-                    SameSite = SameSiteMode.Strict,
-                    Expires = DateTimeOffset.UtcNow.AddHours(24) // 24 hour expiry
+                    SameSite = SameSiteMode.Lax, // Changed from Strict to Lax
+                    Expires = DateTimeOffset.UtcNow.AddHours(24),
+                    Path = "/" // Explicitly set path
                 };
 
                 Response.Cookies.Append("ScreenIdentifier", screen.Identifier, cookieOptions);
@@ -45,17 +46,18 @@ namespace keynote_asp.Controllers
         {
             try
             {
-                // Create a new spectator object
-                var spectator = new TR_Spectator();
-                SpectatorService.AddOrUpdate(spectator);
+                Request.Cookies.TryGetValue("SpectatorIdentifier", out var identity);
+                var spectator = SpectatorService.GetOrCreate(identity!);
 
                 // Set the spectator identifier as a cookie
+                // Replace this in both GetScreenSession and GetSpectatorSession:
                 var cookieOptions = new CookieOptions
                 {
                     HttpOnly = true,
                     Secure = true,
-                    SameSite = SameSiteMode.Strict,
-                    Expires = DateTimeOffset.UtcNow.AddHours(24) // 24 hour expiry
+                    SameSite = SameSiteMode.Lax, // Changed from Strict to Lax
+                    Expires = DateTimeOffset.UtcNow.AddHours(24),
+                    Path = "/" // Explicitly set path
                 };
 
                 Response.Cookies.Append("SpectatorIdentifier", spectator.Identifier, cookieOptions);

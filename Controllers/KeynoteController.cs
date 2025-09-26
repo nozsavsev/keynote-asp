@@ -17,21 +17,16 @@ namespace keynote_asp.Controllers
 
         [HttpPost]
         [Route("createKeynote")]
-        [Authorize]
-        public async Task<ActionResult<ResponseWrapper<KeynoteDTO>>> Create(CreateKeynoteDTO keynote)
+        [Authorize("PrUploadFiles")]
+        [RequestSizeLimit(200 * 1024 * 1024)] // 200 MB
+        public async Task<ActionResult<ResponseWrapper<KeynoteDTO>>> Create([FromForm] CreateKeynoteDTO keynote)
         {
             try
             {
                 var KeynoteUser = HttpContext.GetKeynoteUser();
-                var NauthSession = HttpContext.GetNauthSession();
+                var NauthUser = HttpContext.GetNauthUser();
 
-                var newKeynote = new DB_Keynote();
-
-                var db_keynote = mapper.Map(keynote, newKeynote);
-
-                db_keynote.UserId = KeynoteUser!.Id;
-
-                var created = await keynoteService.AddAsync(db_keynote);
+                var created = await keynoteService.AddAsync(keynote, NauthUser!);
 
                 return Ok(new ResponseWrapper<KeynoteDTO>(WrResponseStatus.Ok, mapper.Map<KeynoteDTO>(created)));
             }

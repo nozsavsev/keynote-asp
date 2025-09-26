@@ -1,3 +1,4 @@
+using keynote_asp.Helpers;
 using keynote_asp.Models.User;
 
 namespace keynote_asp.Models.Keynote
@@ -14,7 +15,7 @@ namespace keynote_asp.Models.Keynote
 
     public class DB_Keynote
     {
-        public long Id { get; set; }
+        public long Id { get; set; } = SnowflakeGlobal.Generate();
 
         public KeynoteTransitionType TransitionType { get; set; } = KeynoteTransitionType.none;
         public KeynoteType Type { get; set; } = KeynoteType.Pdf;
