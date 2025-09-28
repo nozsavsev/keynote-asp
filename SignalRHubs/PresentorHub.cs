@@ -1,18 +1,19 @@
-using System.Collections.Concurrent;
-using System.Text.RegularExpressions;
 using AutoMapper;
 using keynote_asp.Helpers;
 using keynote_asp.Models.Transient;
 using keynote_asp.Services;
 using keynote_asp.Services.Transient;
+using Keynote_asp.Nauth.API_GEN.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using Keynote_asp.Nauth.API_GEN.Models;
+using System.Collections.Concurrent;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace keynote_asp.SignalRHubs
 {
     [AllowAnonymous]
-    public class PresentorHub(IMapper mapper) : BaseHub(mapper)
+    public class PresentorHub(IMapper mapper, SignalRRefreshService refreshService) : BaseHub(mapper, refreshService)
     {
 
         #region private
@@ -40,7 +41,18 @@ namespace keynote_asp.SignalRHubs
                     var room = RoomService.GetByRoomCode(presentor.RoomCode);
                     if (room != null)
                     {
+                        Console.WriteLine($"[PresentorHub] Reconnecting presentor to room group: {room.Identifier}");
                         await Groups.AddToGroupAsync(Context.ConnectionId, room.Identifier);
+
+                        // Send refresh to notify others that presentor reconnected
+                        await SendRefresh(room.Identifier);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"[PresentorHub] Room not found for RoomCode: {presentor.RoomCode}");
+                        // Clear invalid room code
+                        presentor.RoomCode = string.Empty;
+                        PresentorService.AddOrUpdate(presentor);
                     }
                 }
 
@@ -92,6 +104,7 @@ namespace keynote_asp.SignalRHubs
             // Get or create presentor with nauth session ID as identifier
             var presentor = PresentorService.GetOrCreate(nauthSession.Id!);
             presentor.nauthUser = nauthUser;
+            presentor.ConnectionId = Context.ConnectionId;
             PresentorService.AddOrUpdate(presentor);
 
             return presentor;
@@ -118,6 +131,47 @@ namespace keynote_asp.SignalRHubs
             return mapper.Map<TR_PresentorDTO>(presentor);
         }
 
+        public async Task<TR_RoomDTO?> RemoveSpectator(string identifier)
+        {
+            var presentor = await ValidateNauthUserAndGetPresentor();
+            if (presentor == null) return null;
+
+            var spectator = SpectatorService.GetById(identifier);
+
+            var room = RoomService.GetByRoomCode(presentor.RoomCode);
+
+            if (spectator != null && spectator.RoomCode == presentor.RoomCode && room != null)
+            {
+                await Groups.RemoveFromGroupAsync(spectator.ConnectionId, room.Identifier);
+                spectator.RoomCode = string.Empty;
+                SpectatorService.AddOrUpdate(spectator);
+            }
+
+
+            return mapper.Map<TR_RoomDTO>(mapper.Map<TR_RoomDTO>(room));
+        }
+
+        public async Task<TR_RoomDTO?> RemoveScreen(string identifier)
+        {
+            var presentor = await ValidateNauthUserAndGetPresentor();
+            if (presentor == null) return null;
+
+            var screen = ScreenService.GetById(identifier);
+
+            var room = RoomService.GetByRoomCode(presentor.RoomCode);
+
+            if (screen != null && screen.RoomCode == presentor.RoomCode && room != null)
+            {
+                screen.RoomCode = string.Empty;
+                await SendRefresh(room.Identifier);
+                await Groups.RemoveFromGroupAsync(screen.ConnectionId, room.Identifier);
+                ScreenService.AddOrUpdate(screen);
+            }
+
+
+            return mapper.Map<TR_RoomDTO>(mapper.Map<TR_RoomDTO>(room));
+        }
+
         public async Task<TR_PresentorDTO?> SetPresentorName(string name)
         {
             var presentor = await ValidateNauthUserAndGetPresentor();
@@ -129,7 +183,7 @@ namespace keynote_asp.SignalRHubs
 
             var room = RoomService.GetByRoomCode(presentor.RoomCode);
             if (room != null)
-                SendRefresh(room.Identifier);
+                await SendRefresh(room.Identifier);
 
             return mapper.Map<TR_PresentorDTO>(presentor);
         }
@@ -155,8 +209,10 @@ namespace keynote_asp.SignalRHubs
 
             PresentorService.joinRoom(presentor.Identifier, room.RoomCode);
 
+            presentor = PresentorService.GetById(presentor.Identifier);
+
             await Groups.AddToGroupAsync(Context.ConnectionId, room.Identifier);
-            SendRefresh(room.Identifier);
+            await SendRefresh(room.Identifier);
 
             return mapper.Map<TR_RoomDTO>(room);
         }
@@ -176,7 +232,7 @@ namespace keynote_asp.SignalRHubs
 
             room.Keynote = await keynoteService.GetByIdAsync(long.Parse(keynoteId));
             RoomService.AddOrUpdate(room);
-            SendRefresh(room.Identifier);
+            await SendRefresh(room.Identifier);
 
             return mapper.Map<TR_RoomDTO>(room);
         }
@@ -190,11 +246,11 @@ namespace keynote_asp.SignalRHubs
             if (room == null || room.Keynote == null) return null;
 
             room.currentFrame =
-                page > (room.Keynote?.TotalFrames ?? 0) ? (room.Keynote?.TotalFrames ?? 0)
+                page > (room.Keynote?.TotalFrames + 1 ?? 0) ? (room.Keynote?.TotalFrames + 1 ?? 0)
                 : page < 0 ? 0
                 : page;
             RoomService.AddOrUpdate(room);
-            SendRefresh(room.Identifier);
+            await SendRefresh(room.Identifier);
 
             return mapper.Map<TR_RoomDTO>(room);
         }
@@ -209,7 +265,7 @@ namespace keynote_asp.SignalRHubs
 
             room.ShowSpectatorQR = show;
             RoomService.AddOrUpdate(room);
-            SendRefresh(room.Identifier);
+            await SendRefresh(room.Identifier);
 
             return mapper.Map<TR_RoomDTO>(room);
         }
@@ -224,7 +280,7 @@ namespace keynote_asp.SignalRHubs
 
             room.TempControlSpectatorId = spectatorId;
             RoomService.AddOrUpdate(room);
-            SendRefresh(room.Identifier);
+            await SendRefresh(room.Identifier);
 
             return mapper.Map<TR_RoomDTO>(room);
         }
@@ -239,14 +295,32 @@ namespace keynote_asp.SignalRHubs
 
             room.TempControlSpectatorId = null;
             RoomService.AddOrUpdate(room);
-            SendRefresh(room.Identifier);
+            await SendRefresh(room.Identifier);
 
             return mapper.Map<TR_RoomDTO>(room);
         }
 
-        public async void SendRoomCodeToScreen(string roomCode, string tempId)
+        public async Task<TR_RoomDTO?> SendRoomCodeToScreen(string roomCode, string ScreenIdentifier)
         {
-            Clients.Group(tempId)?.SendAsync("RoomCode", tempId);
+            var presentor = await ValidateNauthUserAndGetPresentor();
+            if (presentor == null) return null;
+
+            var screen = ScreenService.GetById(ScreenIdentifier);
+
+            if (screen != null)
+            {
+                var room = RoomService.GetByRoomCode(roomCode);
+
+                if (room != null)
+                {
+                    room = RoomService.GetById(room.Identifier)!;
+                    await refreshService.SendOnScreenHub(screen.Identifier, "RoomCode", room.RoomCode);
+
+                    return mapper.Map<TR_RoomDTO>(room);
+                }
+            }
+
+            return null;
         }
     }
 }

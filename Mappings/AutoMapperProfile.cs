@@ -39,7 +39,11 @@ namespace keynote_asp.Mappings
 
             CreateMap<TR_BaseEntity, TR_BaseEntityDTO>();
 
-            CreateMap<TR_Room, TR_RoomDTO>();
+            CreateMap<TR_Room, TR_RoomDTO>()
+                .ForMember(dest => dest.Presentor, opt => opt.MapFrom(src => src.Presentor))
+                .ForMember(dest => dest.Screen, opt => opt.MapFrom(src => src.Screen))
+                .ForMember(dest => dest.Spectators, opt => opt.MapFrom(src => src.Spectators));
+            
             CreateMap<TR_Presentor, TR_PresentorDTO>();
             CreateMap<TR_Screen, TR_ScreenDTO>();
             CreateMap<TR_Spectator, TR_SpectatorDTO>();

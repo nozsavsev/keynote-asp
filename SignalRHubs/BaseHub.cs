@@ -1,6 +1,7 @@
 using AutoMapper;
 using keynote_asp.Helpers;
 using keynote_asp.Models.Transient;
+using keynote_asp.Services;
 using keynote_asp.Services.Transient;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
@@ -8,9 +9,10 @@ using Microsoft.AspNetCore.SignalR;
 namespace keynote_asp.SignalRHubs
 {
     [AllowAnonymous]
-    public abstract class BaseHub(IMapper mapper) : Hub
+    public abstract class BaseHub(IMapper mapper, SignalRRefreshService refreshService) : Hub
     {
         protected readonly IMapper mapper = mapper;
+        protected readonly SignalRRefreshService refreshService = refreshService;
 
         public override async Task OnConnectedAsync()
         {
@@ -22,7 +24,7 @@ namespace keynote_asp.SignalRHubs
                 Context.Abort();
                 return;
             }
-            
+
             await CleanupOldEntities();
         }
 
@@ -32,11 +34,11 @@ namespace keynote_asp.SignalRHubs
         }
 
         /// <summary>
-        /// Sends refresh signal to all connections in a room group
+        /// Sends refresh signal to all connections in a room group across all hubs
         /// </summary>
-        public async void SendRefresh(string roomIdentifier)
+        public async Task SendRefresh(string roomIdentifier)
         {
-            Clients.Group(roomIdentifier)?.SendAsync("Refresh");
+            await refreshService.SendRefreshToAllHubs(roomIdentifier);
         }
 
         /// <summary>
@@ -69,21 +71,21 @@ namespace keynote_asp.SignalRHubs
             bool hasActiveEntities = false;
 
             // Check presentor
-            if (presentor != null && (presentor.IsConnected || 
+            if (presentor != null && (presentor.IsConnected ||
                 (presentor.DisconnectedAt.HasValue && presentor.DisconnectedAt.Value > DateTime.UtcNow.AddHours(-24))))
             {
                 hasActiveEntities = true;
             }
 
             // Check screen
-            if (screen != null && (screen.IsConnected || 
+            if (screen != null && (screen.IsConnected ||
                 (screen.DisconnectedAt.HasValue && screen.DisconnectedAt.Value > DateTime.UtcNow.AddHours(-24))))
             {
                 hasActiveEntities = true;
             }
 
             // Check spectators
-            if (spectators.Any(s => s.IsConnected || 
+            if (spectators.Any(s => s.IsConnected ||
                 (s.DisconnectedAt.HasValue && s.DisconnectedAt.Value > DateTime.UtcNow.AddHours(-24))))
             {
                 hasActiveEntities = true;

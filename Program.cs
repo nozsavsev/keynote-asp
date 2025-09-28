@@ -94,6 +94,10 @@ namespace keynote_asp
             });
 
             builder.Services.AddSignalR();
+            
+            // Register SignalR Refresh Service for cross-hub communication
+            builder.Services.AddScoped<SignalRRefreshService>();
+            
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 

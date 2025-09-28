@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using keynote_asp.Helpers;
 using keynote_asp.Models.Transient;
+using keynote_asp.Services;
 using keynote_asp.Services.Transient;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.SignalR;
 namespace keynote_asp.SignalRHubs
 {
     [AllowAnonymous]
-    public class SpectatorHub(IMapper mapper) : BaseHub(mapper)
+    public class SpectatorHub(IMapper mapper, SignalRRefreshService refreshService) : BaseHub(mapper, refreshService)
     {
         #region private
         protected override async Task<bool> ReconnectExistingSession()
@@ -36,7 +37,18 @@ namespace keynote_asp.SignalRHubs
                             var room = RoomService.GetByRoomCode(spectator.RoomCode);
                             if (room != null)
                             {
+                                Console.WriteLine($"[SpectatorHub] Reconnecting spectator to room group: {room.Identifier}");
                                 await Groups.AddToGroupAsync(Context.ConnectionId, room.Identifier);
+
+                                // Send refresh to notify others that spectator reconnected
+                                await SendRefresh(room.Identifier);
+                            }
+                            else
+                            {
+                                Console.WriteLine($"[SpectatorHub] Room not found for RoomCode: {spectator.RoomCode}");
+                                // Clear invalid room code
+                                spectator.RoomCode = string.Empty;
+                                SpectatorService.AddOrUpdate(spectator);
                             }
                         }
 
@@ -90,7 +102,7 @@ namespace keynote_asp.SignalRHubs
             )
             {
                 var spectator = SpectatorService.GetById(SpectatorIdentifier);
-                var room = RoomService.GetByRoomCode(spectator?.RoomCode);
+                var room = RoomService.GetByRoomCode(spectator?.RoomCode ?? string.Empty);
                 return mapper.Map<TR_RoomDTO>(room);
             }
 
@@ -108,6 +120,39 @@ namespace keynote_asp.SignalRHubs
             {
                 var spectator = SpectatorService.GetById(SpectatorIdentifier);
                 return mapper.Map<TR_SpectatorDTO>(spectator);
+            }
+
+            return null;
+        }
+
+        public async Task<TR_SpectatorDTO?> SetHandRaised(bool isRaised)
+        {
+            if (
+                Context
+                    .GetHttpContext()!
+                    .Request.Cookies.TryGetValue(
+                        "SpectatorIdentifier",
+                        out string? SpectatorIdentifier
+                    )
+                && SpectatorIdentifier != null
+            )
+            {
+                var spectator = SpectatorService.GetById(SpectatorIdentifier);
+                if (spectator != null)
+                {
+
+                    spectator.IsHandRaised = isRaised;
+
+                    SpectatorService.AddOrUpdate(spectator);
+
+
+                    var room = RoomService.GetByRoomCode(spectator.RoomCode);
+                    if (room != null)
+                    {
+                        await SendRefresh(room.Identifier);
+                        return mapper.Map<TR_SpectatorDTO>(spectator);
+                    }
+                }
             }
 
             return null;
@@ -137,8 +182,40 @@ namespace keynote_asp.SignalRHubs
                     var room = RoomService.GetByRoomCode(spectator.RoomCode);
                     if (room != null)
                     {
-                        SendRefresh(room.Identifier);
+                        await SendRefresh(room.Identifier);
                         return mapper.Map<TR_SpectatorDTO>(spectator);
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public async Task<TR_RoomDTO?> LeaveRoom()
+        {
+            if (
+                Context
+                    .GetHttpContext()!
+                    .Request.Cookies.TryGetValue(
+                        "SpectatorIdentifier",
+                        out string? SpectatorIdentifier
+                    )
+                && SpectatorIdentifier != null
+            )
+            {
+                var spectator = SpectatorService.GetById(SpectatorIdentifier);
+
+                if (spectator != null)
+                {
+                    var roomIdentifier = RoomService
+                        .QuerySingle(q => q.Where(r => r.RoomCode == spectator.RoomCode))
+                        ?.Identifier!;
+                    if (roomIdentifier != null)
+                    {
+                        spectator.RoomCode = string.Empty;
+                        await SendRefresh(roomIdentifier);
+                        await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomIdentifier);
+                        return mapper.Map<TR_RoomDTO>(RoomService.GetById(roomIdentifier));
                     }
                 }
             }
@@ -167,7 +244,9 @@ namespace keynote_asp.SignalRHubs
                         ?.Identifier!;
                     if (roomIdentifier != null)
                     {
+                        spectator.RoomCode = roomCode;
                         await Groups.AddToGroupAsync(Context.ConnectionId, roomIdentifier);
+                        await SendRefresh(roomIdentifier);
                         return mapper.Map<TR_RoomDTO>(RoomService.GetById(roomIdentifier));
                     }
                 }
@@ -195,7 +274,7 @@ namespace keynote_asp.SignalRHubs
                 : page < 0 ? 0
                 : page;
             RoomService.AddOrUpdate(room);
-            SendRefresh(room.Identifier);
+            await SendRefresh(room.Identifier);
 
             return mapper.Map<TR_RoomDTO>(room);
         }

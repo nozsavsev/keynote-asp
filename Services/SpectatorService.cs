@@ -19,7 +19,7 @@ namespace keynote_asp.Services
             spectator.IsHandRaised = true;
             SpectatorService.AddOrUpdate(spectator);
 
-            hub.SendRefresh(room.Identifier);
+            hub.SendRefresh(room.Identifier).Wait();
 
             return spectator;
         }

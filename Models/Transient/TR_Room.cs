@@ -35,7 +35,7 @@ namespace keynote_asp.Models.Transient
     public class TR_RoomDTO : TR_BaseEntityDTO
     {
         public DB_Keynote? Keynote { get; set; } = null;
-        public int currentFrame { get; set; } = 0;
+        public int currentFrame { get; set; } = 1;
         public bool ShowSpectatorQR { get; set; } = false;
         public string? TempControlSpectatorId { get; set; } = null;
         public TR_PresentorDTO? Presentor { get; set; } = null;

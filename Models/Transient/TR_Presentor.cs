@@ -6,11 +6,13 @@ namespace keynote_asp.Models.Transient
     public class TR_Presentor : TR_BaseEntity
     {
         public UserDTO? nauthUser { get; set; } = null;
+        private string? field;
+        
         public string Name
         {
             get
             {
-                if (nauthUser?.Name != null)
+                if (field == null && nauthUser?.Name != null)
                 {
                     return nauthUser.Name;
                 }

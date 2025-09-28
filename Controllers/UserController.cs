@@ -44,8 +44,9 @@ namespace keynote_asp.Controllers
                     return BadRequest(new ResponseWrapper<KeynoteUserDTO>(WrResponseStatus.InternalError, null));
                 }
 
+                var resultDTO = _mapper.Map<KeynoteUserDTO>(KeynoteUser);
 
-                return Ok(new ResponseWrapper<KeynoteUserDTO>(WrResponseStatus.Ok, _mapper.Map<KeynoteUserDTO>(KeynoteUser)));
+                return Ok(new ResponseWrapper<KeynoteUserDTO>(WrResponseStatus.Ok, resultDTO));
             }
             catch (Exception ex)
             {

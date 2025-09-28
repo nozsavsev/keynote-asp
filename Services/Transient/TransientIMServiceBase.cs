@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using keynote_asp.Helpers;
 using keynote_asp.Models.Transient;
 
 namespace keynote_asp.Services.Transient
@@ -31,6 +32,7 @@ namespace keynote_asp.Services.Transient
 
             // If not found, create new entity with constructor-generated ID
             var newItem = new T();
+            newItem.Identifier = id ?? SnowflakeGlobal.Generate().ToString();
             return _items.GetOrAdd(newItem.Identifier, newItem);
         }
 
@@ -59,8 +61,8 @@ namespace keynote_asp.Services.Transient
             var item = GetById(id);
             if (item == null) return; // Item doesn't exist, silently fail
             
-            // Check if room exists by looking for any entity with this room code
-            var roomExists = _items.Values.Any(x => x.RoomCode == roomCode);
+            // Check if room exists by looking in RoomService
+            var roomExists = RoomService.GetByRoomCode(roomCode) != null;
             if (!roomExists) return; // Room doesn't exist, silently fail
             
             item.RoomCode = roomCode;

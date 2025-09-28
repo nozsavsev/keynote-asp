@@ -18,7 +18,7 @@ namespace keynote_asp.Services
 
             PresentorService.joinRoom(presentor.Identifier, room.Identifier);
 
-            hub.SendRefresh(room.Identifier);
+            hub.SendRefresh(room.Identifier).Wait();
 
             return room;
         }
@@ -28,7 +28,7 @@ namespace keynote_asp.Services
             var room = RoomService.GetById(roomIdentifier);
             room.Keynote = keynoteService.GetByIdAsync(long.Parse(keynoteId)).Result;
             RoomService.AddOrUpdate(room);
-            hub.SendRefresh(room.Identifier);
+            hub.SendRefresh(room.Identifier).Wait();
 
             return room;
         }
@@ -47,7 +47,7 @@ namespace keynote_asp.Services
                 : page < 0 ? 0
                 : page;
             RoomService.AddOrUpdate(room);
-            hub.SendRefresh(room.Identifier);
+            hub.SendRefresh(room.Identifier).Wait();
 
             return room;
         }
@@ -63,7 +63,7 @@ namespace keynote_asp.Services
 
             room.ShowSpectatorQR = show;
             RoomService.AddOrUpdate(room);
-            hub.SendRefresh(room.Identifier);
+            hub.SendRefresh(room.Identifier).Wait();
 
             return room;
         }
@@ -73,7 +73,7 @@ namespace keynote_asp.Services
             var room = RoomService.GetById(roomIdentifier);
             room.TempControlSpectatorId = spectatorId;
             RoomService.AddOrUpdate(room);
-            hub.SendRefresh(room.Identifier);
+            hub.SendRefresh(room.Identifier).Wait();
 
             return room;
         }
@@ -83,7 +83,7 @@ namespace keynote_asp.Services
             var room = RoomService.GetById(roomIdentifier);
             room.TempControlSpectatorId = null;
             RoomService.AddOrUpdate(room);
-            hub.SendRefresh(room.Identifier);
+            hub.SendRefresh(room.Identifier).Wait();
 
             return room;
         }

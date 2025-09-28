@@ -12,11 +12,8 @@ using Keynote_asp.Nauth.API_GEN.Models;
 namespace keynote_asp.SignalRHubs
 {
     [AllowAnonymous]
-    public class ScreenHub(IMapper mapper) : BaseHub(mapper)
+    public class ScreenHub(IMapper mapper, SignalRRefreshService refreshService) : BaseHub(mapper, refreshService)
     {
-        //                 ScreenId  TempId
-        ConcurrentDictionary<string, string> ScreenWaitingForCode =
-            new ConcurrentDictionary<string, string>();
 
         #region private
         protected override async Task<bool> ReconnectExistingSession()
@@ -33,10 +30,18 @@ namespace keynote_asp.SignalRHubs
                     var screen = ScreenService.GetById(screenIdentifier);
                     if (screen != null)
                     {
+                        Console.WriteLine($"[ScreenHub] Reconnecting screen {screenIdentifier}, RoomCode: {screen.RoomCode}");
+
+                        // Update screen connection state
                         screen.IsConnected = true;
                         screen.ConnectionId = Context.ConnectionId;
                         screen.DisconnectedAt = null;
                         ScreenService.AddOrUpdate(screen);
+                        Console.WriteLine($"[ScreenHub] Updated screen connection state - ConnectionId: {Context.ConnectionId}, IsConnected: true");
+
+                        // Add to screen's own group
+                        await Groups.AddToGroupAsync(Context.ConnectionId, screen.Identifier);
+                        Console.WriteLine($"[ScreenHub] Added screen to its own group: {screen.Identifier}");
 
                         // Rejoin room if exists
                         if (!string.IsNullOrEmpty(screen.RoomCode))
@@ -44,44 +49,30 @@ namespace keynote_asp.SignalRHubs
                             var room = RoomService.GetByRoomCode(screen.RoomCode);
                             if (room != null)
                             {
+                                Console.WriteLine($"[ScreenHub] Adding screen to room group: {room.Identifier}");
                                 await Groups.AddToGroupAsync(Context.ConnectionId, room.Identifier);
+                                Console.WriteLine($"[ScreenHub] Successfully added screen to room group: {room.Identifier}");
+                                
+                                // Send refresh to notify others that screen reconnected
+                                await SendRefresh(room.Identifier);
                             }
+                            else
+                            {
+                                Console.WriteLine($"[ScreenHub] Room not found for RoomCode: {screen.RoomCode}");
+                                // Clear invalid room code
+                                screen.RoomCode = string.Empty;
+                                ScreenService.AddOrUpdate(screen);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"[ScreenHub] Screen has no RoomCode, not joining any room group");
                         }
 
                         return true; // Screen session exists and reconnected successfully
                     }
                 }
                 catch { /* Screen doesn't exist, ignore */ }
-            }
-
-            // Check for spectator session (screens may also handle spectator functionality)
-            if (httpContext.Request.Cookies.TryGetValue("SpectatorIdentifier", out string? spectatorIdentifier)
-                && spectatorIdentifier != null)
-            {
-                try
-                {
-                    var spectator = SpectatorService.GetById(spectatorIdentifier);
-                    if (spectator != null)
-                    {
-                        spectator.IsConnected = true;
-                        spectator.ConnectionId = Context.ConnectionId;
-                        spectator.DisconnectedAt = null;
-                        SpectatorService.AddOrUpdate(spectator);
-
-                        // Rejoin room if exists
-                        if (!string.IsNullOrEmpty(spectator.RoomCode))
-                        {
-                            var room = RoomService.GetByRoomCode(spectator.RoomCode);
-                            if (room != null)
-                            {
-                                await Groups.AddToGroupAsync(Context.ConnectionId, room.Identifier);
-                            }
-                        }
-
-                        return true; // Spectator session exists and reconnected successfully
-                    }
-                }
-                catch { /* Spectator doesn't exist, ignore */ }
             }
 
             return false; // No valid session found
@@ -146,7 +137,7 @@ namespace keynote_asp.SignalRHubs
             )
             {
                 var screen = ScreenService.GetById(ScreenIdentifier);
-                var room = RoomService.GetByRoomCode(screen?.RoomCode);
+                var room = RoomService.GetByRoomCode(screen?.RoomCode ?? string.Empty);
                 return mapper.Map<TR_RoomDTO>(room);
             }
 
@@ -163,31 +154,15 @@ namespace keynote_asp.SignalRHubs
             )
             {
                 var screen = ScreenService.GetById(ScreenIdentifier);
-                return mapper.Map<TR_ScreenDTO>(screen);
+                var final = mapper.Map<TR_ScreenDTO>(screen);
+                Console.WriteLine($"ScreenRoomCode is: {final.RoomCode} ");
+                return final;
             }
 
             return null;
         }
 
-        public async Task<string> WaitRoomAsScreen()
-        {
-            if (
-                Context
-                    .GetHttpContext()!
-                    .Request.Cookies.TryGetValue("ScreenIdentifier", out string? ScreenIdentifier)
-                && ScreenIdentifier != null
-            )
-            {
-                var tempId = SnowflakeGlobal.Generate().ToString();
-                ScreenWaitingForCode[ScreenIdentifier] = tempId;
-                await Groups.AddToGroupAsync(Context.ConnectionId, tempId);
-                return tempId;
-            }
-
-            return "";
-        }
-
-        public async Task<TR_RoomDTO?> JoinRoomAsScreen(string roomCode)
+        public async Task LeaveRoom()
         {
             if (
                 Context
@@ -200,20 +175,81 @@ namespace keynote_asp.SignalRHubs
 
                 if (screen != null)
                 {
+                    Console.WriteLine($"[ScreenHub] Screen {ScreenIdentifier} leaving room {screen.RoomCode}");
+                    
                     var roomIdentifier = RoomService
-                        .QuerySingle(q => q.Where(r => r.RoomCode == roomCode))
+                        .QuerySingle(q => q.Where(r => r.RoomCode == screen.RoomCode))
                         ?.Identifier!;
 
                     if (roomIdentifier != null)
                     {
-                        await Groups.RemoveFromGroupAsync(
-                            Context.ConnectionId,
-                            ScreenWaitingForCode[ScreenIdentifier]
-                        );
-                        await Groups.AddToGroupAsync(Context.ConnectionId, roomIdentifier);
-                        return mapper.Map<TR_RoomDTO>(RoomService.GetById(roomIdentifier));
+                        // Remove from room group
+                        await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomIdentifier);
+                        
+                        // Add back to screen's own group
+                        await Groups.AddToGroupAsync(Context.ConnectionId, ScreenIdentifier);
+                        
+                        // Update screen state
+                        screen.RoomCode = string.Empty;
+                        ScreenService.AddOrUpdate(screen);
+                        
+                        // Send refresh to notify others that screen left
+                        Console.WriteLine($"[ScreenHub] Sending refresh after screen leave");
+                        await SendRefresh(roomIdentifier);
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"[ScreenHub] Room not found for RoomCode: {screen.RoomCode}");
+                        // Clear invalid room code
+                        screen.RoomCode = string.Empty;
+                        ScreenService.AddOrUpdate(screen);
                     }
                 }
+            }
+
+            return;
+        }
+
+        public async Task<TR_RoomDTO?> JoinRoomAsScreen(string roomCode)
+        {
+            try
+            {
+                
+                if (
+                    Context
+                        .GetHttpContext()!
+                        .Request.Cookies.TryGetValue("ScreenIdentifier", out string? ScreenIdentifier)
+                    && ScreenIdentifier != null
+                )
+                {
+                    var screen = ScreenService.GetById(ScreenIdentifier);
+
+                    if (screen != null)
+                    {
+                        var room = RoomService.GetByRoomCode(roomCode);
+                        if (room != null)
+                        {
+                            screen.RoomCode = roomCode;
+                            ScreenService.AddOrUpdate(screen);
+                            
+                            // Add to room group
+                            await Groups.AddToGroupAsync(Context.ConnectionId, room.Identifier);
+                            
+                            await SendRefresh(room.Identifier);
+                            
+                            var updatedRoom = RoomService.GetById(room.Identifier);
+                            
+                            return mapper.Map<TR_RoomDTO>(updatedRoom);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ScreenHub] Error in JoinRoomAsScreen: {ex.Message}");
+                Console.WriteLine($"[ScreenHub] Stack trace: {ex.StackTrace}");
+                throw;
             }
 
             return null;
@@ -236,7 +272,7 @@ namespace keynote_asp.SignalRHubs
                 : page < 0 ? 0
                 : page;
             RoomService.AddOrUpdate(room);
-            SendRefresh(room.Identifier);
+            await SendRefresh(room.Identifier);
 
             return mapper.Map<TR_RoomDTO>(room);
         }
