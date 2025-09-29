@@ -215,4 +215,4 @@ docker run -p 5000:80 keynote-asp
 
 ## License
 
-© 2024 Keynote. All rights reserved.
+© 2024 Ilia Nozdrachev. All rights reserved.
