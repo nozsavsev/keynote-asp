@@ -61,7 +61,7 @@ namespace keynote_asp.AuthHandlers
             }
 
             // Check 2FA confirmation
-            if (requirement.Require2FAConfirmed && !(nauthSession.Is2FAConfirmed ?? false))
+            if (requirement.Require2FAConfirmed && ((nauthSession.Is2FAConfirmed ?? false) == false && nauthUser.TwoFactorAuthEntries?.Where(e => e.IsActive == true).Count() > 0))
             {
                 httpContext.AddAuthenticationFailureReason(AuthFailureReasons._2FARequired);
                 context.Fail();
